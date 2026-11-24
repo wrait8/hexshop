@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HEXVAULT – Pentest gear for authorized testing</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#000;--p:#0c0c0c;--ln:#222;--tx:#f2f2f2;--mu:#7d7d7d;--r:#a97cff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 'JetBrains Mono',ui-monospace,monospace;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--r);outline-offset:3px}
+.d{font-family:'Unbounded',sans-serif}
+nav{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;gap:26px;padding:14px 5vw;padding-top:calc(14px + env(safe-area-inset-top,0px));background:rgba(0,0,0,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+.logo{font:800 18px 'Unbounded',sans-serif;margin-right:auto}.logo b{color:var(--r)}
+nav a.l{color:var(--mu);font-size:13px}nav a.l:hover{color:var(--tx)}
+.cb{background:var(--r);color:#0b0b0b;border:0;border-radius:6px;padding:9px 16px;font:500 13px 'JetBrains Mono',monospace;cursor:pointer}
+.bar{position:fixed;left:0;top:0;height:2px;width:0;background:var(--r);z-index:30}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:110px 5vw 60px;overflow:hidden}
+.glow{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(169,124,255,.28),transparent 65%);left:0;top:0;pointer-events:none;transform:translate(-50%,-50%)}
+.hero h1{position:relative;font:800 clamp(56px,11vw,176px)/.88 'Unbounded',sans-serif;letter-spacing:-.05em;margin:0 0 30px}.tag{position:relative;display:inline-flex;align-items:center;gap:10px;border:1px solid #2a2a2a;border-radius:999px;padding:6px 14px;font-size:12px;color:#bbb;margin-bottom:26px;align-self:flex-start}.tag i{width:8px;height:8px;border-radius:50%;background:var(--r);box-shadow:0 0 10px var(--r);animation:bl 1.4s steps(2) infinite}
+.hero h1 span{color:var(--r)}
+.hero p{position:relative;max-width:56ch;color:#bdbdbd;margin:0 0 30px}
+.btns{position:relative;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 24px;border-radius:6px;border:1px solid #333;background:transparent;color:var(--tx);font:500 14px 'JetBrains Mono',monospace;cursor:pointer}
+.btn.p{background:var(--tx);color:#000;border-color:var(--tx)}.btn:hover{border-color:var(--r)}
+.reaper{margin:44px 0 0;font:clamp(10px,1.6vw,23px)/1 system-ui,'Segoe UI Symbol','Helvetica Neue',Arial,sans-serif;letter-spacing:0;color:#e9e4f5;user-select:none;pointer-events:none;white-space:pre}
+@keyframes fl{0%,100%{transform:translateY(0);opacity:.95}50%{transform:translateY(-12px);opacity:.75}92%{opacity:.95}95%{opacity:.5}}
+.hero p{max-width:min(56ch,52vw)}
+.mq{overflow:hidden;border-block:1px solid var(--ln);white-space:nowrap;background:var(--r);color:#0b0b0b}
+.mq div{display:inline-block;padding:10px 0;font-weight:500;font-size:13px;animation:m 30s linear infinite}
+.mq span{margin:0 26px}
+@keyframes m{to{transform:translateX(-50%)}}
+section{padding:110px 5vw}
+h2{font:800 clamp(30px,5.5vw,72px)/1 'Unbounded',sans-serif;letter-spacing:-.04em;margin:0 0 16px}
+.sub{color:var(--mu);max-width:58ch;margin:0 0 44px}
+.big{font:800 clamp(80px,22vw,320px)/.8 'Unbounded',sans-serif;letter-spacing:-.06em;color:#0f0f0f;-webkit-text-stroke:1px #2a2a2a;white-space:nowrap;margin:0;user-select:none;will-change:transform}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.chip{border:1px solid #2c2c2c;background:transparent;color:var(--mu);border-radius:6px;padding:8px 16px;cursor:pointer;font:500 13px 'JetBrains Mono',monospace}
+.chip[aria-pressed=true]{background:var(--r);border-color:var(--r);color:#0b0b0b}
+.list{border-top:1px solid var(--ln)}
+.row{display:grid;grid-template-columns:70px 1.2fr 2fr 90px 130px;gap:20px;align-items:center;padding:26px 8px;border-bottom:1px solid var(--ln);transition:background .25s,padding .25s}
+.row:hover{background:var(--p);padding-left:22px}
+.row .ic{width:56px;color:#888;transition:color .25s}.row:hover .ic{color:var(--r)}
+.row h3{margin:0;font:500 20px 'Unbounded',sans-serif;letter-spacing:-.02em}
+.row small{display:block;color:var(--r);font-size:11px;margin-bottom:2px}
+.row p{margin:0;color:var(--mu);font-size:14px}
+.pr{font-weight:500;font-size:18px}
+.add{background:transparent;border:1px solid #444;color:var(--tx);border-radius:6px;padding:10px 0;cursor:pointer;font:500 13px 'JetBrains Mono',monospace}
+.add:hover,.add.ok{background:var(--r);border-color:var(--r);color:#0b0b0b}
+.stack{position:relative}
+.sc{position:sticky;top:90px;margin-bottom:34px;background:var(--p);border:1px solid #2a2a2a;border-radius:20px;padding:clamp(24px,4vw,48px);min-height:300px;display:grid;grid-template-columns:1.3fr 1fr;gap:30px;transform-origin:top}
+.sc:nth-child(2){top:110px;background:#101010}.sc:nth-child(3){top:130px;background:#0d0817;border-color:#33205f}
+.sc h3{font:800 clamp(26px,4vw,48px)/1 'Unbounded',sans-serif;letter-spacing:-.04em;margin:0 0 14px}
+.sc p{color:#aaa;margin:0 0 18px}
+.sc ul{margin:0;padding:0;list-style:none;color:var(--mu);font-size:14px;align-self:end}
+.sc li{border-bottom:1px solid #262626;padding:9px 0}.sc li::before{content:"+ ";color:var(--r)}
+.price{font:800 28px 'Unbounded',sans-serif}
+.sp{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:start}
+.term{background:var(--p);border:1px solid var(--ln);border-radius:12px;padding:22px;font-size:13px;line-height:1.9;min-height:290px;position:sticky;top:90px}
+.term .g{color:var(--r)}.term .m{color:var(--mu)}
+.cur{display:inline-block;width:8px;height:14px;background:var(--r);vertical-align:middle;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.num{display:flex;gap:34px;flex-wrap:wrap;margin-top:34px}
+.num b{display:block;font:800 40px/1 'Unbounded',sans-serif}.num span{color:var(--mu);font-size:12px}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.rules div{border-top:2px solid var(--r);padding-top:16px}.rules h4{margin:0 0 6px;font:500 17px 'Unbounded',sans-serif}.rules p{margin:0;color:var(--mu);font-size:14px}
+footer{border-top:1px solid var(--ln);padding:60px 5vw 40px;display:flex;gap:40px;flex-wrap:wrap;justify-content:space-between;color:var(--mu);font-size:13px}
+footer form{display:flex;gap:8px}
+footer input{background:var(--p);border:1px solid #2c2c2c;border-radius:6px;padding:10px 12px;color:var(--tx);font:inherit;min-width:0}
+#dr{position:fixed;inset:0 0 0 auto;width:min(400px,100%);background:#0a0a0a;border-left:1px solid #2a2a2a;z-index:40;transform:translateX(100%);transition:transform .35s;padding:24px;padding-top:calc(24px + env(safe-area-inset-top,0px));display:flex;flex-direction:column}
+#dr.open{transform:none}
+#its{flex:1;overflow:auto;margin:16px 0}
+.it{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--ln);font-size:14px}
+.it button{background:none;border:0;color:var(--r);cursor:pointer;font:inherit}
+.rv{opacity:0;transform:translateY(24px);transition:.7s}.rv.in{opacity:1;transform:none}
+@media(max-width:860px){nav a.l{display:none}.row{grid-template-columns:50px 1fr 90px;gap:12px}.row p{display:none}.row .ic{width:40px}.row .pr{grid-column:2}.row .add{grid-column:3;grid-row:1/3}.sc,.sp{grid-template-columns:1fr}.term{position:static}section{padding:80px 5vw}.sc{position:relative;top:auto!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+.hero p{max-width:56ch}
+@media(max-width:860px){.reaper{font-size:3.3vw}}
+.reaper-c{display:block;width:min(100%,360px);height:auto;margin-top:44px}
+.hero{justify-content:center}
+.hero>.hl,.hero>.win{position:relative;z-index:2}
+.hero h1{font-size:clamp(44px,7.4vw,118px);line-height:.95;margin:0 0 26px}
+.kick{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--r)!important;margin:0 0 18px!important}
+.trust{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}.trust span{font-size:12px;color:#aaa;border:1px solid #262626;border-radius:999px;padding:5px 12px}.trust span::before{content:"✓ ";color:var(--r)}
+.floor{position:absolute;left:-20%;right:-20%;bottom:-5%;height:60%;background-image:linear-gradient(rgba(169,124,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(169,124,255,.3) 1px,transparent 1px);background-size:64px 64px;transform:perspective(420px) rotateX(64deg);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(transparent,#000 70%);mask-image:linear-gradient(transparent,#000 70%);animation:gr 2.5s linear infinite}
+@keyframes gr{to{background-position:0 64px}}
+.win{background:#060606;border:1px solid #2a2a2a;border-radius:12px;box-shadow:0 30px 80px rgba(169,124,255,.18);overflow:hidden}
+.wb{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #222;background:#0d0d0d;font-size:12px;color:var(--mu)}
+.wb i{width:11px;height:11px;border-radius:50%;background:#333}.wb i:first-child{background:var(--r)}.wb span{margin-left:10px}
+.win pre{margin:0;padding:20px;font:13px/1.8 'JetBrains Mono',monospace;min-height:300px;white-space:pre-wrap;color:#cfcfcf}
+.win .g{color:var(--r)}.win .m{color:var(--mu)}
+
+@media(prefers-reduced-motion:reduce){.floor{animation:none}}
+.reaper{font-family:'DejaVu Sans Mono','Menlo','Consolas','Lucida Console','Courier New',monospace;font-variant-ligatures:none}
+.tb{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:28px}.tb .chips{margin:0;flex:1 1 100%}
+.tb input,.tb select,.f input,.f select,.f textarea{background:var(--p);border:1px solid #2c2c2c;border-radius:6px;padding:10px 12px;color:var(--tx);font:inherit;font-size:13px;min-width:0}.tb input{flex:1 1 200px}.vt{display:flex;gap:6px}
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.pc{background:var(--p);border:1px solid var(--ln);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}.pc:hover{border-color:var(--r);transform:translateY(-4px)}
+.pc .im{aspect-ratio:4/3;display:grid;place-items:center;background:radial-gradient(circle at 50% 110%,#241a3d,#080808 70%);color:#999;overflow:hidden}.pc .im svg{width:90px}.pc .im img{width:100%;height:100%;object-fit:cover}.pc:hover .im{color:var(--r)}
+.pc .b{padding:16px;display:flex;flex-direction:column;gap:4px;flex:1}.pc small{color:var(--r);font-size:11px}.pc h3{margin:0;font:500 17px 'Unbounded',sans-serif;letter-spacing:-.02em}.pc p{margin:0;color:var(--mu);font-size:13px;flex:1}
+.pc .r{display:flex;justify-content:space-between;align-items:center;margin-top:12px}.pc .add{padding:8px 14px}
+.row .ic img{width:56px;height:56px;object-fit:cover;border-radius:8px}
+#ad{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.75);display:grid;place-items:center;padding:16px}#ad[hidden]{display:none}
+.adi{background:#0a0a0a;border:1px solid #2a2a2a;border-radius:14px;padding:24px;width:min(520px,100%);max-height:90vh;overflow:auto}
+.f{display:flex;flex-direction:column;gap:12px;margin-top:16px}.f label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--mu)}
+.al{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--ln);font-size:13px}.al button{background:none;border:0;color:var(--r);cursor:pointer;font:inherit}
+.ov{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.78);display:grid;place-items:center;padding:16px}.ov[hidden]{display:none}
+.pdp{position:fixed;inset:0;z-index:45;background:#000;overflow:auto;padding:90px 5vw 70px;padding-top:calc(90px + env(safe-area-inset-top,0px))}.pdp[hidden]{display:none}
+.pdg{display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:start;max-width:1200px;margin:0 auto}
+.pdv{aspect-ratio:1;border:1px solid var(--ln);border-radius:20px;display:grid;place-items:center;background:radial-gradient(circle at 50% 110%,#2a1d4a,#050505 70%);color:var(--r);overflow:hidden;position:sticky;top:20px}.pdv svg{width:52%}.pdv img{width:100%;height:100%;object-fit:cover}
+.pdp h1{font:800 clamp(30px,5vw,60px)/1 'Unbounded',sans-serif;letter-spacing:-.04em;margin:8px 0 14px}.pdp .pp{font:800 34px 'Unbounded',sans-serif;margin:16px 0}
+.bd{display:inline-block;font-size:11px;border-radius:999px;padding:3px 10px;border:1px solid var(--r);color:var(--r)}.bd.out{border-color:#555;color:#999}.bd.ok{border-color:#2a2a2a;color:#9a9a9a}
+.qt{display:flex;align-items:center;gap:6px}.qt button:not(.btn){width:38px;height:38px;border-radius:6px;border:1px solid #333;background:transparent;color:var(--tx);font-size:18px;cursor:pointer}.qt b{min-width:34px;text-align:center}
+.pdp table{width:100%;border-collapse:collapse;margin:8px 0 24px;font-size:14px}.pdp td{border-bottom:1px solid var(--ln);padding:10px 0}.pdp td:first-child{color:var(--mu);width:42%}
+.pdp ul{margin:8px 0 24px;padding:0;list-style:none;color:#bbb;font-size:14px}.pdp li::before{content:"+ ";color:var(--r)}
+.pdp h4{font:500 13px 'JetBrains Mono',monospace;color:var(--r);text-transform:uppercase;letter-spacing:.1em;margin:24px 0 0}
+.stp{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0;font-size:11px}.stp span{border:1px solid #2a2a2a;border-radius:999px;padding:4px 10px;color:var(--mu)}.stp .on{background:var(--r);border-color:var(--r);color:#0b0b0b}.stp .dn{color:var(--r);border-color:var(--r)}
+.ck2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ck2 .w{grid-column:1/-1}
+.ro{display:flex;gap:10px;align-items:flex-start;border:1px solid #2a2a2a;border-radius:8px;padding:12px;font-size:13px;cursor:pointer}.ro input{margin-top:3px;accent-color:#a97cff}
+.sm{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--ln);font-size:14px}
+.er{color:var(--r);font-size:13px;margin:8px 0 0}.pc{cursor:pointer}.add.nt{background:transparent;border-color:var(--r);color:var(--r)}
+.row{cursor:pointer}
+@media(max-width:860px){.pdg{grid-template-columns:1fr}.pdv{position:static}.ck2{grid-template-columns:1fr}}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:5vw;align-items:center}.hero h1{font-size:clamp(42px,6.4vw,104px);margin-bottom:22px}
+.kick{display:inline-flex;align-items:center;gap:10px;border:1px solid #2a2a2a;border-radius:999px;padding:6px 14px;margin:0 0 22px!important;color:#ccc!important;letter-spacing:0!important;text-transform:none!important;font-size:12px!important}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--r);box-shadow:0 0 10px var(--r);animation:bl 1.4s steps(2) infinite}
+.lead{max-width:54ch!important;color:#bdbdbd}
+.qk{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:26px;font-size:12px;color:var(--mu)}.qk button{background:transparent;border:1px solid #2c2c2c;color:var(--tx);border-radius:6px;padding:6px 12px;cursor:pointer;font:500 12px 'JetBrains Mono',monospace}.qk button:hover{border-color:var(--r);color:var(--r)}
+.hs{display:flex;gap:30px;flex-wrap:wrap;margin-top:34px;padding-top:22px;border-top:1px solid var(--ln)}.hs b{display:block;font:800 22px 'Unbounded',sans-serif}.hs span{font-size:11px;color:var(--mu)}
+.hf{position:relative;z-index:2;background:rgba(10,10,10,.85);border:1px solid #2a2a2a;border-radius:20px;overflow:hidden;box-shadow:0 30px 90px rgba(169,124,255,.18);backdrop-filter:blur(6px)}
+.hv{aspect-ratio:16/10;display:grid;place-items:center;background:radial-gradient(circle at 50% 120%,#2a1d4a,#050505 70%);color:var(--r);overflow:hidden}.hv svg{width:34%}.hv img{width:100%;height:100%;object-fit:cover}
+.hb{padding:20px 22px}.hb small{color:var(--r);font-size:11px;text-transform:uppercase;letter-spacing:.1em}.hb h3{margin:6px 0;font:800 26px 'Unbounded',sans-serif;letter-spacing:-.03em}.hb p{margin:0 0 12px;color:var(--mu);font-size:13px}
+.hr{display:flex;justify-content:space-between;align-items:center}.hbt{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.hbt .btn{padding:11px 18px}
+.hn{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--ln);font-size:12px;color:var(--mu)}.hn button{background:transparent;border:1px solid #333;color:var(--tx);width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:16px}
+.scr{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);font-size:11px;color:var(--mu);z-index:2}
+.adm{position:fixed;inset:0;z-index:70;background:#000;display:grid;grid-template-columns:210px 1fr}.adm[hidden]{display:none}
+.as{border-right:1px solid var(--ln);padding:20px 12px;display:flex;flex-direction:column;gap:6px;background:#050505}.al2{font:800 15px 'Unbounded',sans-serif;padding:4px 10px 18px}.al2+*{}
+.as button{text-align:left;background:transparent;border:0;color:var(--mu);padding:10px 12px;border-radius:8px;cursor:pointer;font:500 13px 'JetBrains Mono',monospace}.as button[aria-pressed=true]{background:#17112a;color:var(--r)}.as button:hover{color:var(--tx)}
+#admc{overflow:auto;padding:28px 32px 60px}#admc h2{font:800 22px 'Unbounded',sans-serif;margin:0 0 18px}#admc h4{font:500 12px 'JetBrains Mono',monospace;color:var(--r);text-transform:uppercase;letter-spacing:.1em;margin:26px 0 10px}
+.adm input,.adm select,.adm textarea{background:#0c0c0c;border:1px solid #2c2c2c;border-radius:6px;padding:8px 10px;color:var(--tx);font:inherit;font-size:13px;min-width:0}
+.kp{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.kp div{border:1px solid var(--ln);border-radius:10px;padding:14px;background:var(--p)}.kp b{display:block;font:800 22px 'Unbounded',sans-serif}.kp span{color:var(--mu);font-size:11px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.bars{display:flex;gap:8px;align-items:flex-end;height:120px;border-bottom:1px solid var(--ln)}.bars div{flex:1;background:var(--r);border-radius:4px 4px 0 0;min-height:2px}.bl{display:flex;gap:8px;font-size:10px;color:var(--mu)}.bl span{flex:1;text-align:center}
+.tw{overflow-x:auto}.tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}.tbl th{text-align:left;color:var(--mu);font-weight:400;padding:8px;border-bottom:1px solid var(--ln)}.tbl td{padding:10px 8px;border-bottom:1px solid var(--ln);vertical-align:middle}
+.tbl img{width:44px;height:44px;object-fit:cover;border-radius:6px;display:block}.tbl .th{width:44px;color:var(--mu)}.tbl .th svg{width:36px}
+.tbl button,.ab{background:transparent;border:1px solid #333;color:var(--tx);border-radius:6px;padding:5px 10px;cursor:pointer;font:500 12px 'JetBrains Mono',monospace}.tbl button:hover,.ab:hover{border-color:var(--r);color:var(--r)}.tbl .on{border-color:var(--r);color:var(--r)}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:120px}.scr{display:none}.adm{grid-template-columns:1fr;grid-template-rows:auto 1fr}.as{flex-direction:row;overflow:auto;border-right:0;border-bottom:1px solid var(--ln);padding:10px}.al2{display:none}#admc{padding:18px 16px 60px}.two{grid-template-columns:1fr}}
+.hero{display:flex;flex-direction:column;justify-content:center;grid-template-columns:none}.hero h1{font-size:clamp(44px,7.4vw,118px);margin-bottom:26px}.hero p{max-width:56ch}
+.hero>.hl{position:relative;z-index:2}
+.floor{position:absolute;left:-20%;right:-20%;bottom:-5%;height:58%;z-index:1;background-image:linear-gradient(rgba(169,124,255,.32) 1px,transparent 1px),linear-gradient(90deg,rgba(169,124,255,.32) 1px,transparent 1px);background-size:64px 64px;transform:perspective(420px) rotateX(64deg);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(transparent,#000 70%);mask-image:linear-gradient(transparent,#000 70%);animation:gr 2.5s linear infinite}
+@keyframes gr{to{background-position:0 64px}}
+@media(prefers-reduced-motion:reduce){.floor{animation:none}}
+@media(max-width:860px){.hero{padding-top:120px}.floor{height:42%}}
+.pay{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0}.qrb{background:#fff;padding:10px;border-radius:10px;width:200px;height:200px;display:grid;place-items:center}.pf{flex:1 1 220px;display:flex;flex-direction:column;gap:10px}.pr2{display:grid;grid-template-columns:62px 1fr auto;gap:8px;align-items:center;font-size:12px}.pr2 span{color:var(--mu)}.pr2 code{word-break:break-all;font-size:11px}.ab{background:transparent;border:1px solid #333;color:var(--tx);border-radius:6px;padding:5px 10px;cursor:pointer;font:500 12px 'JetBrains Mono',monospace}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;line-height:1.2}
+.qt .btn{width:auto;height:auto;padding:12px 26px;font-size:14px;margin-left:10px}
+.pbtn{display:flex;width:100%;padding:16px;font-size:16px;margin:8px 0 14px}
+.dt{margin:0 0 14px;font-size:13px;color:var(--mu)}.dt summary{cursor:pointer}
+.wl{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid #2a2a2a;border-radius:12px;margin-top:10px;font-weight:500;font-size:15px}.wl:hover{border-color:var(--r);background:#0e0e0e}.wl i{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-weight:800;color:#000;font-size:13px;flex:none}.wl small{display:block;color:var(--mu);font-weight:400;font-size:12px}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ===== EDIT THESE ===== */
+window.HV_CONFIG={
+  tonAddr:'PASTE_YOUR_TONKEEPER_ADDRESS_HERE',
+  tonRate:3.50,  /* price of 1 TON in USD, update when it moves */
+  manifestUrl:'https://YOUR-SITE.com/tonconnect-manifest.json',
+  orderEndpoint:'', /* e.g. your Formspree URL, it emails you every order */
+  announce:'Free shipping over $150 | Dispatch in 24 hours | 30-day returns'
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js"></script>
+<style>#acb,#adb{display:none!important}</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<nav>
+  <a class="logo" href="#top">HEX<b>VAULT</b></a>
+  <a class="l" href="#shop">Shop</a><a class="l" href="#kits">Kits</a><a class="l" href="#rules">Rules</a>
+  <button class="cb" id="acb" style="background:transparent;border:1px solid #333;color:var(--tx)">Sign in</button>
+  <button class="cb" id="cb">Cart (<span id="cc">0</span>)</button>
+</nav>
+
+<header class="hero" id="top">
+  <div class="floor" aria-hidden="true"></div>
+  <div class="glow" id="glow" aria-hidden="true"></div>
+  <div class="hl">
+    <h1 id="h1">Break it<br><span>before they do.</span></h1>
+    <p>Hardware for red teamers, wireless auditors and security labs.</p>
+    <div class="btns"><a class="btn p" href="#shop">Open the vault</a><a class="btn" href="#kits">Browse kits</a></div>
+  </div>
+</header>
+
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
+
+<section id="shop">
+  <h2>Inside the vault</h2>
+  <p class="sub">Filter by the job. Free shipping over $150, 30-day returns on unopened items.</p>
+  <div class="tb"><div class="chips" id="chips" role="group" aria-label="Filter products"></div>
+    <input id="q" type="search" placeholder="Search gadgets" aria-label="Search gadgets">
+    <select id="so" aria-label="Sort"><option value="feat">Featured</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select>
+    <div class="vt" role="group" aria-label="View"><button class="chip" data-v="grid" aria-pressed="true">Grid</button><button class="chip" data-v="list" aria-pressed="false">List</button></div></div>
+  <div class="list" id="list"></div>
+</section>
+
+<div style="overflow:hidden;padding:20px 0"><p class="big" id="big" aria-hidden="true">AUTHORIZED ONLY AUTHORIZED ONLY</p></div>
+
+<section id="kits">
+  <h2>Kits. Skip the shopping list.</h2>
+  <p class="sub">Pre-matched loadouts with a hard case and a printed quick-start card.</p>
+  <div class="stack">
+    <article class="sc"><div><h3>Wireless Audit</h3><p>Everything to map and test Wi-Fi and radio on your own site.</p><div class="price">$329</div></div><ul><li>Spectre SDR</li><li>Aircheck Dual adapter</li><li>Antenna set + hard case</li></ul></article>
+    <article class="sc"><div><h3>Red Team Drop</h3><p>Small implants and taps for authorized internal engagements.</p><div class="price">$289</div></div><ul><li>Dropbox Mini</li><li>Packet Pup LAN tap</li><li>Cable kit + scope letter template</li></ul></article>
+    <article class="sc"><div><h3>Hardware Bench</h3><p>Open up a device, find the debug port, read the firmware.</p><div class="price">$239</div></div><ul><li>Probe Pro Kit</li><li>Tag Reader Lite</li><li>Soldering starter + pouches</li></ul></article>
+  </div>
+</section>
+
+<section>
+  <div class="sp">
+    <div class="rv"><h2>Trusted by labs in 48 countries.</h2><p class="sub">Independent testers, university labs and in-house security teams.</p>
+      <div class="num"><div><b data-n="12400">0</b><span>kits shipped</span></div><div><b data-n="48">0</b><span>countries</span></div><div><b data-n="24">0</b><span>hour dispatch</span></div></div></div>
+    <div class="term rv" id="term" aria-label="Example terminal"></div>
+  </div>
+</section>
+
+<section id="rules">
+  <h2>Authorized testing only.</h2>
+  <p class="sub">We sell to security professionals, students and hobbyists working on systems they own or have written permission to test.</p>
+  <div class="rules rv">
+    <div><h4>Get it in writing</h4><p>Scope and permission before any test. A free engagement-letter template ships with every order.</p></div>
+    <div><h4>Know your local law</h4><p>Some devices are restricted in some countries. We don’t ship where the law says no.</p></div>
+    <div><h4>Learn the right way</h4><p>Every product links to a lab guide you can run on your own network.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div><b style="color:var(--tx)">HEXVAULT</b><br>Pentest gear for authorized testing.<br>© 2026 Hexvault Labs</div>
+  <form id="nl"><input type="email" required placeholder="you@lab.net" aria-label="Email address"><button class="btn p">Restock alerts</button></form>
+</footer>
+
+<button class="cb" id="adb" style="position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:25;display:none">Admin dashboard</button>
+<div class="adm" id="adm" hidden></div>
+<div id="tch" hidden><div id="tcb"></div></div>
+<div class="ov" id="ck" hidden><div class="adi"><div style="display:flex;justify-content:space-between;align-items:center"><h3 class="d" style="margin:0;font-size:18px">Checkout</h3><button class="chip" id="ckx">Close</button></div><div id="ckc"></div></div></div>
+<div class="ov" id="wp" hidden style="z-index:65"><div class="adi"><div style="display:flex;justify-content:space-between;align-items:center"><h3 class="d" style="margin:0;font-size:18px">Choose your wallet</h3><button class="chip" id="wpx">Close</button></div><div id="wpc"></div></div></div>
+<div class="ov" id="ac2" hidden><div class="adi"><div style="display:flex;justify-content:space-between;align-items:center"><h3 class="d" style="margin:0;font-size:18px">Account</h3><button class="chip" id="ac2x">Close</button></div><div id="ac2c"></div></div></div>
+<div class="ov" id="nt" hidden><div class="adi"><div style="display:flex;justify-content:space-between;align-items:center"><h3 class="d" style="margin:0;font-size:18px">Notify me</h3><button class="chip" id="ntx">Close</button></div><div class="f"><p id="ntp" style="margin:0;color:var(--mu);font-size:13px"></p><input id="nte" type="email" placeholder="you@lab.net" aria-label="Email"><button class="btn p" id="nts">Notify me when back</button><p id="ntm" style="margin:0;font-size:13px;color:var(--r)"></p></div></div></div>
+<div class="pdp" id="pd" hidden></div>
+<aside id="dr" aria-label="Cart">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h3 class="d" style="margin:0;font-size:18px">Your cart</h3><button class="chip" id="cl">Close</button></div>
+  <div id="its"></div>
+  <div style="display:flex;justify-content:space-between;margin-bottom:14px"><span>Total</span><b id="tot">$0</b></div>
+  <button class="btn p" id="co" style="width:100%">Checkout</button>
+</aside>
+
+<script>
+const $=i=>document.getElementById(i);
+const ic={rect:'<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="6" y="18" width="48" height="26" rx="5"/><circle cx="18" cy="31" r="3" fill="currentColor"/><path d="M30 26h16M30 36h10"/></svg>',
+wave:'<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 32q6-24 12 0t12 0 12 0 12 0 8 0"/><path d="M12 50h36"/></svg>',
+plug:'<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="16" y="8" width="28" height="22" rx="4"/><path d="M25 18v5M35 18v5M30 30v22"/></svg>',
+chip:'<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="16" y="16" width="28" height="28" rx="4"/><path d="M24 16V6M30 16V6M36 16V6M24 54V44M30 54V44M36 54V44M16 24H6M16 36H6M54 24H44M54 36H44"/></svg>'};
+const SEED=[['Packet Pup','Network',89,'Pocket LAN tap with passive capture and USB-C power pass-through.','rect',12,'Ports: 2x Gigabit|Power: USB-C pass-through|Capture: Passive, line-rate'],
+['Spectre SDR','Wireless',219,'Wideband software-defined radio, 1 MHz to 6 GHz, antenna set included.','wave',4,'Range: 1 MHz to 6 GHz|Sample rate: 20 MS/s|Antennas: 3 included'],
+['Dropbox Mini','Network',149,'Tiny Linux box for authorized internal tests, preloaded with open-source tools.','rect',0,'CPU: Quad-core ARM|Storage: 32 GB|Power: PoE or USB-C'],
+['Keylogic Cable','USB',59,'USB cable with a programmable payload for lab keyboard-injection drills.','plug',25,'Connector: USB-C to A|Length: 1 m|Mode: Lab payload scripts'],
+['Probe Pro Kit','Hardware',129,'Logic analyzer, UART adapters and 40 test clips for embedded work.','chip',3,'Channels: 16|Sample rate: 100 MHz|Includes: 40 test clips'],
+['Aircheck Dual','Wireless',79,'Dual-band Wi-Fi adapter with monitor mode and injection, driver-tested.','wave',18,'Bands: 2.4 + 5 GHz|Modes: Monitor, injection|Interface: USB 3.0'],
+['Tag Reader Lite','Hardware',99,'Reads and clones low-frequency access tags you own. 10 blank cards.','chip',0,'Frequency: 125 kHz|Range: 5 cm|Includes: 10 blank cards'],
+['Faraday Pouch x3','Hardware',34,'Signal-blocking pouches for evidence handling and bench work.','rect',40,'Pack: 3 pouches|Size: Phone and tablet|Shielding: Multi-layer']].map((x,i)=>({id:'s'+i,name:x[0],cat:x[1],price:x[2],desc:x[3],icon:x[4],stock:x[5],spec:x[6],feat:[1,4,5].includes(i)}));
+const T=['Free shipping over $150','Spectre SDR back in stock','Lab guides on every product','Dispatch in 24 hours','30-day returns'];
+const HV=window.HV_CONFIG||{};let SET={tonAddr:HV.tonAddr||'',tonRate:Number(HV.tonRate)||0,announce:HV.announce||''};function mq(){const a=SET.announce?SET.announce.split('|').map(x=>x.trim()).filter(Boolean):T;$('mq').innerHTML=[...a,...a,...a,...a].map(t=>`<span>/// ${E(t)}</span>`).join('')}
+let DB=[],cat='All',view='grid',qs='',sort='feat',cart=[],PQ=1,ME=null,UA=null,DX=null,col=null;
+const E=t=>String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const allP=()=>[...DB,...SEED.filter(s=>!DB.some(d=>d.id===s.id))];const all=()=>allP().filter(x=>!x.hidden);const byId=id=>all().find(x=>x.id===id);
+const art=x=>x.img&&/^(\/_blob\/|https:\/\/)/.test(x.img)?`<img src="${E(x.img)}" alt="${E(x.name)}" loading="lazy">`:(ic[x.icon]||ic.rect);
+const stk=x=>(x.stock===undefined||x.stock===null||x.stock==='')?Infinity:Number(x.stock);
+const bdg=x=>{const n=stk(x);return n<=0?'<span class="bd out">Sold out</span>':n<=5?`<span class="bd">Only ${n} left</span>`:'<span class="bd ok">In stock</span>'};
+const cnt=id=>cart.filter(i=>i===id).length;
+const ls=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}};
+const K=k=>k+'_'+(ME?ME.id:'g');
+function chips(){const c=['All',...new Set(all().map(x=>x.cat))];if(!c.includes(cat))cat='All';$('chips').innerHTML=c.map(x=>`<button class="chip" aria-pressed="${x===cat}" data-c="${E(x)}">${E(x)}</button>`).join('')}
+const act=x=>stk(x)<=0?`<button class="add nt" data-n="${E(x.id)}">Notify me</button>`:`<button class="add" data-id="${E(x.id)}">Add</button>`;
+function list(){let a=all().filter(x=>(cat==='All'||x.cat===cat)&&(x.name+' '+x.desc+' '+x.cat).toLowerCase().includes(qs));
+if(sort==='lo')a.sort((p,q)=>p.price-q.price);if(sort==='hi')a.sort((p,q)=>q.price-p.price);
+const L=$('list');L.className=view==='grid'?'pg':'list';
+L.innerHTML=a.length?a.map(x=>view==='grid'?`<article class="pc" data-open="${E(x.id)}"><div class="im">${art(x)}</div><div class="b"><small>${E(x.cat)}</small><h3>${E(x.name)}</h3><p>${E(x.desc)}</p><div>${bdg(x)}</div><div class="r"><span class="pr">$${E(x.price)}</span>${act(x)}</div></div></article>`:`<article class="row" data-open="${E(x.id)}"><div class="ic">${art(x)}</div><div><small>${E(x.cat)}</small><h3>${E(x.name)}</h3>${bdg(x)}</div><p>${E(x.desc)}</p><span class="pr">$${E(x.price)}</span>${act(x)}</article>`).join(''):'<p style="color:var(--mu)">No gadgets match your search.</p>'}
+function addTo(id,n){const x=byId(id);if(!x)return 0;let a=0;for(let i=0;i<n;i++){if(cnt(id)>=stk(x))break;cart.push(id);a++}draw();return a}
+$('chips').onclick=e=>{const c=e.target.dataset.c;if(c){cat=c;chips();list()}};
+$('q').oninput=e=>{qs=e.target.value.toLowerCase();list()};$('so').onchange=e=>{sort=e.target.value;list()};
+document.querySelector('.vt').onclick=e=>{const v=e.target.dataset.v;if(!v)return;view=v;document.querySelectorAll('.vt .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));list()};
+$('list').onclick=e=>{const t=e.target,id=t.dataset.id,n=t.dataset.n;
+if(id){const a=addTo(id,1);t.textContent=a?'Added':'Max in stock';t.classList.add('ok');setTimeout(()=>{t.textContent='Add';t.classList.remove('ok')},900);return}
+if(n){openNt(n);return}const o=t.closest('[data-open]');if(o)location.hash='item-'+o.dataset.open};
+// cart
+const sub=()=>cart.reduce((a,id)=>a+Number(byId(id).price),0);
+function draw(){cart=cart.filter(byId);$('cc').textContent=cart.length;const ids=[...new Set(cart)];
+$('its').innerHTML=ids.length?ids.map(id=>{const x=byId(id),n=cnt(id);return `<div class="it"><span>${E(x.name)} × ${n}</span><span>$${x.price*n} <button data-k="${E(id)}" aria-label="Remove one ${E(x.name)}">Remove</button></span></div>`}).join(''):'<p style="color:var(--mu)">Your cart is empty. Add a device from the shop.</p>';$('tot').textContent='$'+sub()}
+$('its').onclick=e=>{const k=e.target.dataset.k;if(k){cart.splice(cart.indexOf(k),1);draw()}};
+$('cb').onclick=()=>$('dr').classList.add('open');$('cl').onclick=()=>$('dr').classList.remove('open');
+$('nl').onsubmit=e=>{e.preventDefault();e.target.innerHTML='<span>You’re on the list.</span>'};
+// ---- checkout (4 steps) ----
+const CK={s:1,a:{},ship:'std',ok:false,sv:true,err:'',done:null,oid:'',tx:'',boc:'',paid:false,cur:'TON'};
+const SH={std:['Standard, 5 to 8 days',9],exp:['Express, 2 to 3 days',24]};
+const shp=()=>(sub()>=150&&CK.ship==='std')?0:SH[CK.ship][1];
+const AF=[['name','Full name','w'],['phone','Phone',''],['zip','Postal code',''],['l1','Street address','w'],['city','City',''],['country','Country','']];
+const addrTxt=a=>[a.name,a.l1,[a.zip,a.city].filter(Boolean).join(' '),a.country,a.phone].filter(Boolean).map(E).join('<br>');
+$('co').onclick=()=>{if(!cart.length){$('co').textContent='Add something first';setTimeout(()=>$('co').textContent='Checkout',1500);return}CK.s=1;CK.err='';CK.done=null;CK.oid='HV-'+Math.random().toString(36).slice(2,8).toUpperCase();CK.tx='';CK.paid=false;CK.a=ls(K('hv_addr'))||{};CK.ok=false;$('dr').classList.remove('open');$('ck').hidden=false;ckr()};
+function ckr(){const tb=$('tcb');if(tb&&$('tch'))$('tch').appendChild(tb);const st=['Cart','Address','Delivery','Payment','Review'];let h='';
+if(!CK.done)h+=`<div class="stp">${st.map((t,i)=>`<span class="${CK.s>i+1?'dn':CK.s===i+1?'on':''}">${i+1}. ${t}</span>`).join('')}</div>`;
+if(CK.done)h+=`<h3 class="d" style="font-size:20px">Order placed</h3><p>Your order number is <b>${E(CK.done)}</b>. We’ll confirm your payment on the blockchain, then pack and ship your order. You can follow the status in your account.</p><button class="btn p" data-go="close">Back to shop</button>`;
+else if(CK.s===1)h+=[...new Set(cart)].map(id=>{const x=byId(id),n=cnt(id);return `<div class="sm"><span>${E(x.name)} × ${n}</span><span>$${x.price*n}</span></div>`}).join('')+`<div class="sm"><b>Subtotal</b><b>$${sub()}</b></div><p class="er">${E(CK.err)}</p><button class="btn p" data-go="next">Continue to address</button>`;
+else if(CK.s===2)h+=(ME?'':'<p style="color:var(--mu);font-size:13px">Sign in to keep your address for next time.</p>')+`<div class="f"><div class="ck2">${AF.map(f=>`<label class="${f[2]}">${f[1]}<input data-a="${f[0]}" value="${E(CK.a[f[0]]||'')}"></label>`).join('')}</div><label style="flex-direction:row;align-items:center;gap:8px"><input type="checkbox" id="cks" ${CK.sv?'checked':''} style="accent-color:#a97cff"> Save this address for future orders</label></div><p class="er">${E(CK.err)}</p><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" data-go="back">Back</button><button class="btn p" data-go="next">Continue to delivery</button></div>`;
+else if(CK.s===3)h+=`<div class="f">${Object.entries(SH).map(([k,v])=>`<label class="ro"><input type="radio" name="sh" value="${k}" ${CK.ship===k?'checked':''}><span>${v[0]}<br><span style="color:var(--mu)">${k==='std'&&sub()>=150?'Free':'$'+v[1]}</span></span></label>`).join('')}<label class="ro"><input type="checkbox" id="cka" ${CK.ok?'checked':''}><span>I will only use this equipment on systems I own or have written permission to test, and it is legal where I live.</span></label></div><p class="er">${E(CK.err)}</p><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" data-go="back">Back</button><button class="btn p" data-go="next">Review order</button></div>`;
+else if(CK.s===4)h+=payHtml();else h+=[...new Set(cart)].map(id=>{const x=byId(id),n=cnt(id);return `<div class="sm"><span>${E(x.name)} × ${n}</span><span>$${x.price*n}</span></div>`}).join('')+`<div class="sm"><span>Shipping (${SH[CK.ship][0]})</span><span>$${shp()}</span></div><div class="sm"><b>Total</b><b>$${sub()+shp()}</b></div><p style="font-size:13px;color:var(--mu)">Ship to:<br>${addrTxt(CK.a)}</p><p style="font-size:13px;color:var(--mu)">Payment: ${payAmt()} ${CK.cur}, comment ${E(CK.oid)}</p><div style="display:flex;gap:8px"><button class="btn" data-go="back">Back</button><button class="btn p" data-go="place">Place order</button></div>`;
+$('ckc').innerHTML=h;if(CK.s===4&&!CK.done){qr();if($('tcslot')&&$('tcb'))$('tcslot').appendChild($('tcb'))}}
+$('ckc').onclick=e=>{if(e.target.dataset.tcpay){tcPay();return}if(e.target.dataset.wp){openWp();return}const cu=e.target.dataset.cur;if(cu){CK.cur=cu;CK.paid=false;ckr();return}const cp=e.target.dataset.cp;if(cp!==undefined){try{navigator.clipboard.writeText(cp)}catch(x){}e.target.textContent='Copied';return}const g=e.target.dataset.go;if(!g)return;CK.err='';
+if(g==='close'){$('ck').hidden=true;return}
+if(g==='back'){CK.s--;ckr();return}
+if(g==='next'){if(CK.s===2){document.querySelectorAll('[data-a]').forEach(i=>CK.a[i.dataset.a]=i.value.trim());CK.sv=$('cks').checked;if(!['name','l1','city','zip','country'].every(k=>CK.a[k])){CK.err='Please fill in name, street, city, postal code and country.';ckr();return}}
+if(CK.s===3){const r=document.querySelector('[name=sh]:checked');if(r)CK.ship=r.value;CK.ok=$('cka').checked;if(!CK.ok){CK.err='Please confirm authorized use to continue.';ckr();return}}
+if(CK.s===4){if(!tonOK()){CK.err='TON payment is not available yet.';ckr();return}CK.tx=$('ckt')?$('ckt').value.trim():'';CK.paid=!!($('ckp')&&$('ckp').checked);if(!CK.paid){CK.err='Please send the payment first, then tick the box.';ckr();return}}
+CK.s++;ckr();return}
+if(g==='place'){const o={type:'order',id:CK.oid,items:[...new Set(cart)].map(id=>({n:byId(id).name,q:cnt(id)})),total:sub()+shp(),addr:CK.a,status:'Awaiting payment',pay:{m:CK.cur,amt:payAmt(),tx:CK.tx,boc:CK.boc},ts:Date.now()};
+const L=ls(K('hv_orders'))||[];L.unshift(o);ls(K('hv_orders'),L);if(CK.sv){ls(K('hv_addr'),CK.a);try{ME&&DX&&DX.collection('data/users/'+ME.id).doc('addr').set({type:'addr',...CK.a,ts:Date.now()}).catch(()=>{})}catch(x){}}
+try{if(ME&&DX){const rf=DX.collection('orders').doc(ME.id);rf.get().then(sn=>{const cur=(sn.exists&&sn.data().orders)||[];return rf.set({name:ME.name,orders:[o,...cur]})}).catch(()=>{})}}catch(x){}
+if(HV.orderEndpoint){try{fetch(HV.orderEndpoint,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({order:o.id,total:o.total,status:o.status,items:o.items.map(i=>i.n+' x'+i.q).join(', '),name:o.addr.name,phone:o.addr.phone,address:[o.addr.l1,o.addr.city,o.addr.zip,o.addr.country].join(', '),pay_amount_ton:o.pay.amt,pay_boc:o.pay.boc})}).catch(()=>{})}catch(x){}}
+cart=[];draw();CK.done=o.id;ckr()}};
+$('ckx').onclick=()=>$('ck').hidden=true;
+const JM='EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs';
+const uq=()=>{let h=0;for(const c of CK.oid)h=(h*31+c.charCodeAt(0))%90;return (h+10)/10000};
+const tonAmt=()=>SET.tonRate>0?Math.round((Math.ceil((sub()+shp())/SET.tonRate*100)/100+uq())*10000)/10000:0;
+const payAmt=()=>CK.cur==='USDT'?Math.ceil((sub()+shp())*100)/100:tonAmt();
+const hasAddr=()=>!!(SET.tonAddr&&SET.tonAddr.length>=40);
+const tonOK=()=>hasAddr()&&payAmt()>0;
+const tkUri=()=>`https://app.tonkeeper.com/transfer/${SET.tonAddr}?amount=${Math.round(payAmt()*1e9)}&text=${CK.oid}`;
+const tonUri=()=>CK.cur==='USDT'?`ton://transfer/${SET.tonAddr}?jetton=${JM}&amount=${Math.round(payAmt()*1e6)}&text=${CK.oid}`:`ton://transfer/${SET.tonAddr}?amount=${Math.round(payAmt()*1e9)}&text=${CK.oid}`;
+function payHtml(){const back='<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" data-go="back">Back</button>';
+if(!hasAddr())return `<p>Payments aren’t switched on yet. The shop owner still needs to add a wallet address in the admin Settings.</p>${back}</div>`;
+if(!tonOK())return `<p>TON payments aren’t available right now. The shop owner still needs to set the TON price in Settings.</p>${back}</div>`;
+const am=payAmt();return `<p style="color:var(--mu);font-size:13px">Total $${sub()+shp()} = <b style="color:var(--tx)">${am} TON</b>. Tap the button and pick your TON wallet app. The amount, address and order comment are filled in for you. Send the exact amount: its last digits identify your order.</p>${TC?`<div id="tcslot" style="margin:8px 0 12px"></div>${TC.connected?`<button class="btn p pbtn" data-tcpay="1">Pay ${am} TON</button>`:''}<button class="chip" data-wp="1" style="margin-bottom:12px">Other ways to pay</button>`:`<button class="btn p pbtn" data-wp="1">Pay with TON</button>`}<details class="dt"><summary>Button not opening? Pay from another device</summary><div class="pay"><div class="qrb" id="qrb"></div><div class="pf"><div class="pr2"><span>Amount</span><b>${am} TON</b><button class="ab" data-cp="${am}">Copy</button></div><div class="pr2"><span>Address</span><code>${E(SET.tonAddr)}</code><button class="ab" data-cp="${E(SET.tonAddr)}">Copy</button></div><div class="pr2"><span>Comment</span><b>${E(CK.oid)}</b><button class="ab" data-cp="${E(CK.oid)}">Copy</button></div></div></div></details><div class="f"><label>Transaction hash (optional, helps us find it faster)<input id="ckt" value="${E(CK.tx)}"></label><label class="ro"><input type="checkbox" id="ckp" ${CK.paid?'checked':''}><span>I have sent the payment</span></label></div><p class="er">${E(CK.err)}</p>${back}<button class="btn p" data-go="next">Review order</button></div>`}
+function openWp(){const ad=SET.tonAddr,nano=Math.round(payAmt()*1e9),am=payAmt(),tx=encodeURIComponent(CK.oid);
+const W=[['Tonkeeper','#3aa0ff','T',tkUri(),'Opens the Tonkeeper app'],['MyTonWallet','#e6e6e6','M',`https://my.tt/transfer/${ad}?amount=${nano}&text=${tx}`,'Opens the MyTonWallet app'],['Telegram Wallet','#2aabee','TG',`https://t.me/sendgrams?to=${ad}&amount=${am}`,'Opens Wallet in Telegram. Paste the comment below yourself.'],['Other TON wallet','#a97cff','···',tonUri(),'Opens any TON wallet installed on your phone']];
+$('wpc').innerHTML=`<p style="color:var(--mu);font-size:13px">Pay <b style="color:var(--tx)">${am} TON</b>. Pick the app you use and it opens with the payment ready.</p>${W.map(w=>`<a class="wl" href="${E(w[3])}" target="_blank" rel="noopener"><i style="background:${w[1]}">${w[2]}</i><span>${w[0]}<small>${w[4]}</small></span></a>`).join('')}<div class="pr2" style="margin-top:16px"><span>Comment</span><b>${E(CK.oid)}</b><button class="ab" data-cp="${E(CK.oid)}">Copy</button></div><p style="color:var(--mu);font-size:12px">After you confirm in your wallet, come back and tick “I have sent the payment”.</p>`;$('wp').hidden=false}
+$('wpx').onclick=()=>$('wp').hidden=true;
+$('wp').onclick=e=>{const c=e.target.dataset.cp;if(c!==undefined){try{navigator.clipboard.writeText(c)}catch(x){}e.target.textContent='Copied'}else if(e.target===$('wp'))$('wp').hidden=true};
+function qr(){const b=$('qrb');if(!b||!tonOK()||typeof QRCode==='undefined')return;try{new QRCode(b,{text:tonUri(),width:180,height:180,colorDark:'#000000',colorLight:'#ffffff'})}catch(e){}}
+// ---- account ----
+const acct=()=>{$('acb').textContent=ME?'Hi, '+E((ME.name||'Member').split(' ')[0]):'Sign in'};
+async function setMe(){ME=null;try{if(UA&&ls('hv_out')!==1){const id=await UA.id();let nm='';try{const p=await UA.profiles([id]);nm=(p[id]&&p[id].name)||''}catch(e){}ME={id,name:nm||'Member'}}}catch(e){}acct()}
+function acr(){let h='';if(ME){const a=ls(K('hv_addr')),o=ls(K('hv_orders'))||[];
+h=`<p>Signed in as <b>${E(ME.name)}</b></p><h4 class="d" style="font-size:13px">Saved address</h4><p style="font-size:13px;color:var(--mu)">${a?addrTxt(a):'None yet. You can save one at checkout.'}</p>${a?'<button class="chip" data-ac="rm">Remove address</button>':''}<h4 class="d" style="font-size:13px;margin-top:18px">Orders</h4>${o.length?o.map(x=>`<div class="al"><span>${E(x.id)} · ${new Date(x.ts).toLocaleDateString()} · ${E(x.status||'New')}</span><span>$${E(x.total)}</span></div>`).join(''):'<p style="font-size:13px;color:var(--mu)">No orders yet.</p>'}<button class="btn" data-ac="out" style="margin-top:20px">Sign out</button>`}
+else h=UA?'<p>You are signed out of the shop.</p><button class="btn p" data-ac="in">Sign in</button>':'<p style="color:var(--mu);font-size:14px">Shop accounts use your Claude sign-in. Open this page while signed in to Claude to save addresses and see your orders. You can still check out as a guest.</p>';
+$('ac2c').innerHTML=h}
+$('acb').onclick=()=>{acr();$('ac2').hidden=false};$('ac2x').onclick=()=>$('ac2').hidden=true;
+$('ac2c').onclick=async e=>{const a=e.target.dataset.ac;if(a==='out'){ls('hv_out',1);ME=null;acct();acr()}if(a==='in'){ls('hv_out',0);await setMe();await remote();acr()}if(a==='rm'){ls(K('hv_addr'),null);try{DX&&DX.collection('data/users/'+ME.id).doc('addr').delete().catch(()=>{})}catch(x){}acr()}};
+async function remote(){try{if(!ME||!DX)return;const ad=await DX.collection('data/users/'+ME.id).doc('addr').get();if(ad.exists&&!ls(K('hv_addr')))ls(K('hv_addr'),ad.data());const od=await DX.collection('orders').doc(ME.id).get();if(od.exists&&od.data().orders)ls(K('hv_orders'),od.data().orders)}catch(e){}}
+// ---- notify me ----
+let NID=null;function openNt(id){NID=id;$('ntp').textContent='We’ll email you when '+byId(id).name+' is back in stock.';$('ntm').textContent='';$('nt').hidden=false}
+$('ntx').onclick=()=>$('nt').hidden=true;
+$('nts').onclick=()=>{const em=$('nte').value.trim();if(!/^\S+@\S+\.\S+$/.test(em)){$('ntm').textContent='Enter a valid email.';return}
+const L=ls('hv_notify')||[];L.push({id:NID,email:em});ls('hv_notify',L);try{if(ME&&DX)DX.collection('notify').doc(ME.id).set({name:ME.name,reqs:L}).catch(()=>{})}catch(x){}$('ntm').textContent='Done. You’re on the list.';$('nte').value=''};
+// ---- item page ----
+function pdr(x){const rel=all().filter(y=>y.id!==x.id&&y.cat===x.cat).slice(0,3),n=stk(x);
+$('pd').innerHTML=`<div class="pdg"><div style="grid-column:1/-1"><button class="chip" data-p="back">← Back to shop</button></div><div class="pdv">${art(x)}</div><div><small class="mono" style="color:var(--r)">${E(x.cat)}</small><h1>${E(x.name)}</h1>${bdg(x)}<div class="pp">$${E(x.price)}</div><p style="color:#bbb">${E(x.desc)}</p>
+${n<=0?`<button class="btn p" data-p="nt">Notify me when back</button>`:`<div class="qt"><button data-p="m" aria-label="Less">−</button><b>${PQ}</b><button data-p="p" aria-label="More">+</button><button class="btn p" data-p="add" style="width:auto;margin-left:10px">Add to cart</button></div>`}
+<p style="font-size:13px;color:var(--mu);margin-top:14px">Free shipping over $150 · 30-day returns · Dispatch in 24 hours</p>
+${x.spec?`<h4>Specs</h4><table>${x.spec.split('|').map(r=>{const p=r.split(': ');return `<tr><td>${E(p[0])}</td><td>${E(p[1]||'')}</td></tr>`}).join('')}</table>`:''}
+<h4>In the box</h4><ul><li>${E(x.name)}</li><li>USB-C cable</li><li>Quick-start card</li><li>Authorized-use guide</li></ul>
+<h4>Use it responsibly</h4><p style="font-size:13px;color:var(--mu)">For systems you own or have written permission to test. Check your local laws before you order.</p></div>
+${rel.length?`<div style="grid-column:1/-1"><h4>More ${E(x.cat)}</h4><div class="pg" style="margin-top:14px">${rel.map(y=>`<article class="pc" data-open="${E(y.id)}"><div class="im">${art(y)}</div><div class="b"><h3>${E(y.name)}</h3><div class="r"><span class="pr">$${E(y.price)}</span>${bdg(y)}</div></div></article>`).join('')}</div></div>`:''}</div>`}
+function route(){const m=location.hash.match(/^#item-([A-Za-z0-9]+)$/),x=m&&byId(m[1]);const was=!$('pd').hidden;$('pd').hidden=!x;document.body.style.overflow=x?'hidden':'';if(x){if(!was)PQ=1;pdr(x);if(!was)$('pd').scrollTop=0}}
+$('pd').onclick=e=>{const p=e.target.dataset.p,o=e.target.closest('[data-open]');const m=location.hash.match(/^#item-([A-Za-z0-9]+)$/),id=m&&m[1];
+if(p==='back'){location.hash='shop';return}if(p==='m'){PQ=Math.max(1,PQ-1);route();return}if(p==='p'){PQ=Math.min(9,PQ+1);route();return}
+if(p==='add'){const a=addTo(id,PQ);e.target.textContent=a?'Added ✓':'Max in stock';setTimeout(route,900);return}if(p==='nt'){openNt(id);return}if(o)location.hash='item-'+o.dataset.open};
+addEventListener('hashchange',route);addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('pd').hidden)location.hash='shop'});
+chips();list();draw();route();mq();
+// ---- admin dashboard (Editors and the owner only) ----
+let ORD=[],NTF=[],AT='ov',ED=null,AM='',DELID=null,admr=()=>{};
+const money=n=>'$'+Math.round(n).toLocaleString();
+const ordsAll=()=>ORD.flatMap(u=>(u.orders||[]).map(o=>({...o,uid:u.uid,cn:u.name||'Guest'}))).sort((a,b)=>b.ts-a.ts);
+const thumb=x=>x.img&&/^(\/_blob\/|https:\/\/)/.test(x.img)?`<img src="${E(x.img)}" alt="">`:`<div class="th">${ic[x.icon]||ic.rect}</div>`;
+(async()=>{try{if(!window.claude)return;UA=await claude.use('user');DX=await claude.use('db');await setMe();await remote();
+if(!DX)return;const col=DX.collection('products');
+col.orderBy('ts','desc').onSnapshot(sn=>{DB=sn.docs.map(d=>({...d.data(),id:d.id}));chips();list();draw();route();admr(1)},()=>{});
+DX.collection('settings').doc('site').onSnapshot(sn=>{SET=sn.exists?sn.data():{};mq();admr(1)},()=>{});
+if(!(UA&&await UA.canEdit()))return;const assets=await claude.use('assets');
+DX.collection('orders').onSnapshot(sn=>{ORD=sn.docs.map(d=>({...d.data(),uid:d.id}));admr(1)},()=>{});
+DX.collection('notify').onSnapshot(sn=>{NTF=sn.docs.map(d=>({...d.data(),uid:d.id}));admr(1)},()=>{});
+$('adm').innerHTML=`<div class="as"><div class="al2">HEX<span style="color:var(--r)">VAULT</span> admin</div>${[['ov','Overview'],['pr','Products'],['or','Orders'],['nf','Restock alerts'],['st','Settings']].map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join('')}<button data-t="x" style="margin-top:auto">Close ✕</button></div><main id="admc"></main>`;
+$('adb').style.display='block';$('adb').onclick=()=>{$('adm').hidden=false;document.body.style.overflow='hidden';admr()};
+const sv=(x,d)=>col.doc(x).set(d);
+const tOv=()=>{const P=allP(),fin=P.filter(x=>stk(x)!==Infinity),O=ordsAll(),ok=O.filter(o=>!['Cancelled','Awaiting payment','New'].includes(o.status||'New'));
+const kp=[['Products',P.length],['Units in stock',fin.reduce((a,x)=>a+stk(x),0)],['Low stock',P.filter(x=>stk(x)>0&&stk(x)<=5).length],['Sold out',P.filter(x=>stk(x)<=0).length],['Inventory value',money(fin.reduce((a,x)=>a+stk(x)*x.price,0))],['Orders',O.length],['Revenue',money(ok.reduce((a,o)=>a+Number(o.total),0))],['Awaiting payment',O.filter(o=>['New','Awaiting payment'].includes(o.status||'New')).length]];
+const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-6+i);return d}),rv=days.map(d=>ok.filter(o=>new Date(o.ts).toDateString()===d.toDateString()).reduce((a,o)=>a+Number(o.total),0)),mx=Math.max(1,...rv);
+const att=P.filter(x=>stk(x)<=5);
+return `<h2>Overview</h2><div class="kp">${kp.map(k=>`<div><b>${k[1]}</b><span>${k[0]}</span></div>`).join('')}</div><h4>Revenue, last 7 days</h4><div class="bars">${rv.map(v=>`<div style="height:${v/mx*100}%" title="${money(v)}"></div>`).join('')}</div><div class="bl">${days.map(d=>`<span>${d.toLocaleDateString(undefined,{weekday:'short'})}</span>`).join('')}</div>
+<div class="two"><div><h4>Needs attention</h4>${att.length?att.map(x=>`<div class="al"><span>${E(x.name)}</span><span>${stk(x)<=0?'Sold out':stk(x)+' left'}</span></div>`).join(''):'<p style="color:var(--mu);font-size:13px">Everything is well stocked.</p>'}</div><div><h4>Recent orders</h4>${O.slice(0,5).map(o=>`<div class="al"><span>${E(o.id)} · ${E(o.cn)}</span><span>${money(o.total)} · ${E(o.status||'New')}</span></div>`).join('')||'<p style="color:var(--mu);font-size:13px">No orders yet.</p>'}</div></div>`};
+const tPr=()=>{const miss=SEED.some(x=>!DB.some(d=>d.id===x.id));
+return `<h2>Products</h2><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><button class="btn p" data-new="1">+ New gadget</button>${miss?'<button class="btn" data-imp="1">Import starter gadgets to edit them</button>':''}</div><div class="tw"><table class="tbl"><tr><th></th><th>Gadget</th><th>Price</th><th>Stock</th><th>Status</th><th></th></tr>${allP().map(x=>{const own=DB.some(d=>d.id===x.id);return `<tr><td>${thumb(x)}</td><td><b>${E(x.name)}</b><br><span style="color:var(--mu)">${E(x.cat)}</span></td><td>$${E(x.price)}</td><td>${own?`<input type="number" min="0" style="width:70px" value="${E(x.stock==null?'':x.stock)}" data-st="${E(x.id)}" aria-label="Stock for ${E(x.name)}">`:`<span style="color:var(--mu)">${stk(x)===Infinity?'∞':stk(x)}</span>`}</td><td>${own?`<button class="${x.feat?'on':''}" data-ft="${E(x.id)}">★ Hero</button> <button class="${x.hidden?'':'on'}" data-hd="${E(x.id)}">${x.hidden?'Hidden':'Live'}</button>`:'<span style="color:var(--mu)">Starter</span>'}</td><td>${own?`<button data-ed="${E(x.id)}">Edit</button> <button data-del="${E(x.id)}">${DELID===x.id?'Confirm delete':'Delete'}</button>`:''}</td></tr>`}).join('')}</table></div>`};
+const tOr=()=>{const O=ordsAll();return `<h2>Orders</h2>${SET.tonAddr?`<p style="margin:0 0 14px"><a class="ab" href="https://actonscan.com/address/${E(SET.tonAddr)}?network=mainnet" target="_blank" rel="noopener">Open wallet history ↗</a> <span style="color:var(--mu);font-size:12px">Match each payment by its exact amount or comment, then set the order to Paid.</span></p>`:''}${O.length?`<div class="tw"><table class="tbl"><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Date</th><th>Status</th></tr>${O.map(o=>`<tr><td><b>${E(o.id)}</b></td><td>${E(o.cn)}<details><summary style="color:var(--mu);cursor:pointer">Ship to</summary><span style="color:var(--mu)">${addrTxt(o.addr||{})}</span></details></td><td>${(o.items||[]).map(i=>E(i.n)+' × '+E(i.q)).join('<br>')}</td><td>${money(o.total)}${o.pay?`<br><span style="color:var(--mu);word-break:break-all">${E(o.pay.amt)} ${E(o.pay.m||'TON')}<br>${/^[0-9a-fA-F]{64}$/.test(o.pay.tx||'')?`<a href="https://actonscan.com/tx/${E(o.pay.tx)}?network=mainnet" target="_blank" rel="noopener" style="color:var(--r)">View tx ↗</a>`:E(o.pay.tx||'no tx given')}</span>`:''}</td><td>${new Date(o.ts).toLocaleDateString()}</td><td><select data-os="${E(o.uid)}|${E(o.id)}">${['Awaiting payment','Paid','Packed','Shipped','Delivered','Cancelled'].map(t=>`<option ${(o.status||'New')===t?'selected':''}>${t}</option>`).join('')}</select></td></tr>`).join('')}</table></div>`:'<p style="color:var(--mu)">No orders yet. Orders from signed-in customers show up here live.</p>'}`};
+const tNf=()=>{const g={};NTF.forEach(u=>(u.reqs||[]).forEach(r=>{(g[r.id]=g[r.id]||[]).push(r.email)}));const ks=Object.keys(g);
+return `<h2>Restock alerts</h2>${ks.length?ks.map(k=>{const x=allP().find(y=>y.id===k);return `<h4>${E(x?x.name:k)} · ${g[k].length} waiting</h4><p style="font-size:13px;color:#bbb">${[...new Set(g[k])].map(E).join('<br>')}</p>`}).join(''):'<p style="color:var(--mu)">Nobody is waiting on a sold-out item yet.</p>'}`};
+const tSt=()=>`<h2>Settings</h2><div class="f" style="max-width:560px"><label>Tonkeeper wallet address (customers pay TON here)<input id="s_w" value="${E(SET.tonAddr||'')}" placeholder="UQ..."></label><label>TON price in USD (update it when the price moves)<input id="s_r" type="number" min="0" step="0.01" value="${E(SET.tonRate||'')}" placeholder="3.50"></label><label>Ticker messages, separated by |<textarea id="s_a" rows="3" placeholder="Free shipping over $150 | Dispatch in 24 hours">${E(SET.announce||'')}</textarea></label><button class="btn p" data-ss="1" style="align-self:flex-start">Save settings</button></div>`;
+const pform=()=>{const p=ED==='new'?{}:(allP().find(x=>x.id===ED)||{}),cs=[...new Set(allP().map(x=>x.cat))];
+return `<h2>${ED==='new'?'New gadget':'Edit gadget'}</h2><div class="f" style="max-width:600px"><label>Name<input id="f_n" value="${E(p.name)}" maxlength="60"></label><div class="ck2"><label>Category<input id="f_c" list="f_cl" value="${E(p.cat)}"><datalist id="f_cl">${cs.map(c=>`<option value="${E(c)}">`).join('')}</datalist></label><label>Price (USD)<input id="f_p" type="number" min="0" value="${E(p.price)}"></label><label>Stock (empty = unlimited)<input id="f_s" type="number" min="0" value="${E(p.stock==null?'':p.stock)}"></label><label>Icon (if no photo)<select id="f_i">${['rect','wave','plug','chip'].map(i=>`<option ${p.icon===i?'selected':''}>${i}</option>`).join('')}</select></label></div><label>Description<textarea id="f_d" rows="3" maxlength="200">${E(p.desc)}</textarea></label><label>Specs, one per line as Name: Value<textarea id="f_sp" rows="4">${E((p.spec||'').split('|').join('\n'))}</textarea></label><label>Photo${p.img?' (leave empty to keep the current one)':''}<input id="f_f" type="file" accept="image/*"></label><label class="ro"><input type="checkbox" id="f_ft" ${p.feat?'checked':''}> Feature in the hero</label><label class="ro"><input type="checkbox" id="f_h" ${p.hidden?'checked':''}> Hide from the shop</label><div style="display:flex;gap:8px"><button class="btn p" data-sv="1">Save gadget</button><button class="btn" data-cx="1">Cancel</button></div></div>`};
+admr=pa=>{if($('adm').hidden||!$('admc'))return;if(pa&&(ED!==null||(document.activeElement&&document.activeElement.closest&&document.activeElement.closest('#admc')&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))))return;
+document.querySelectorAll('.as [data-t]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===AT));
+$('admc').innerHTML=(AM?`<p class="er">${E(AM)}</p>`:'')+(AT==='pr'&&ED!==null?pform():({ov:tOv,pr:tPr,or:tOr,nf:tNf,st:tSt}[AT])())};
+$('adm').onclick=async e=>{const d=e.target.dataset;AM='';
+try{if(d.t){if(d.t==='x'){$('adm').hidden=true;document.body.style.overflow='';return}AT=d.t;ED=null;DELID=null}
+else if(d.new){ED='new'}else if(d.ed){ED=d.ed}else if(d.cx){ED=null}
+else if(d.imp){let i=0;for(const x of SEED){if(!DB.some(y=>y.id===x.id))await sv(x.id,{name:x.name,cat:x.cat,price:x.price,desc:x.desc,icon:x.icon,stock:x.stock,spec:x.spec,feat:x.feat,hidden:false,ts:i++})}AM='Starter gadgets imported. You can edit them now.'}
+else if(d.ft){const p=DB.find(x=>x.id===d.ft);await col.doc(d.ft).update({feat:!p.feat})}
+else if(d.hd){const p=DB.find(x=>x.id===d.hd);await col.doc(d.hd).update({hidden:!p.hidden})}
+else if(d.del){if(DELID===d.del){await col.doc(d.del).delete();DELID=null;AM='Deleted.'}else DELID=d.del}
+else if(d.ss){await DX.collection('settings').doc('site').set({announce:$('s_a').value.trim(),tonAddr:$('s_w').value.trim(),tonRate:Number($('s_r').value)||0});AM='Settings saved.'}
+else if(d.sv){const nm=$('f_n').value.trim(),pr=$('f_p').value;if(!nm||pr===''||Number(pr)<0){AM='Add a name and a price.';admr();return}
+const old=ED==='new'?{}:(DB.find(x=>x.id===ED)||{});let img=old.img||'';const f=$('f_f').files[0];if(f){if(!assets){AM='Photo upload is not available here.';admr();return}img=(await assets.upload(f)).url}
+const id=ED==='new'?'p'+Date.now():ED;await sv(id,{name:nm,cat:$('f_c').value.trim()||'Other',price:Number(pr),desc:$('f_d').value.trim(),icon:$('f_i').value,img,stock:$('f_s').value===''?null:Number($('f_s').value),spec:$('f_sp').value.split('\n').map(x=>x.trim()).filter(x=>x.includes(':')).join('|'),feat:$('f_ft').checked,hidden:$('f_h').checked,ts:old.ts||Date.now()});ED=null;AM='Saved. It is live in the shop.'}
+else return}catch(x){AM='Something went wrong: '+(x&&x.message||'error')}
+admr()};
+$('adm').onchange=async e=>{const d=e.target.dataset;try{if(d.st){await col.doc(d.st).update({stock:e.target.value===''?null:Number(e.target.value)})}
+if(d.os){const [uid,oid]=d.os.split('|'),u=ORD.find(x=>x.uid===uid);if(u)await DX.collection('orders').doc(uid).update({orders:u.orders.map(o=>o.id===oid?{...o,status:e.target.value}:o)})}}catch(x){AM='Could not update.';admr()}};
+}catch(e){}})();
+// progress bar + drifting big text
+const big=$('big');
+addEventListener('scroll',()=>{const h=document.documentElement;$('bar').style.width=scrollY/(h.scrollHeight-innerHeight)*100+'%';const r=big.getBoundingClientRect();big.style.transform=`translateX(${(r.top-innerHeight)*.5}px)`},{passive:true});
+// reveal, counters, terminal
+let typed=0;
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');e.target.querySelectorAll('[data-n]').forEach(n=>{const to=+n.dataset.n,t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/1400);n.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString();if(k<1)requestAnimationFrame(f)})(t0)});if(e.target.id==='term'&&!typed){typed=1;const L=['<span class="m"># field kit: wireless audit</span>','<span class="g">$</span> hexvault kit --list','  1x Spectre SDR','  1x Aircheck Dual adapter','  1x Hard case + quick-start','<span class="g">$</span> hexvault scope --check','<span class="g">!</span> No signed scope found.','  Get written permission first.','<span class="g">$</span> <span class="cur"></span>'];let i=0;const t=e.target;t.innerHTML='';(function n(){if(i<L.length){t.innerHTML+=L[i++]+'<br>';setTimeout(n,380)}})()}io.unobserve(e.target)}),{threshold:.25});
+document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+// hero: red glow follows pointer + title scramble
+const g=$('glow');let gx=innerWidth*.7,gy=innerHeight*.4;g.style.transform=`translate(${gx}px,${gy}px) translate(-50%,-50%)`;
+$('top').addEventListener('pointermove',e=>{g.style.transform=`translate(${e.clientX}px,${e.clientY}px) translate(-50%,-50%)`});
+
+// ---- official TON Connect ----
+let TC=null;
+(function(){try{if(typeof TON_CONNECT_UI==='undefined'||!HV.manifestUrl||/YOUR-SITE/.test(HV.manifestUrl))return;
+TC=new TON_CONNECT_UI.TonConnectUI({manifestUrl:HV.manifestUrl,buttonRootId:'tcb'});
+TC.onStatusChange(()=>{if(!$('ck').hidden&&CK.s===4&&!CK.done)ckr()})}catch(e){TC=null}})();
+async function tcPay(){try{const r=await TC.sendTransaction({validUntil:Math.floor(Date.now()/1000)+600,messages:[{address:SET.tonAddr,amount:String(Math.round(payAmt()*1e9))}]});CK.paid=true;CK.boc=r&&r.boc||'';CK.err='';CK.s=5;ckr()}catch(e){CK.err='The payment was cancelled or did not go through. Please try again.';ckr()}}
+</script>
+</body>
+</html>
