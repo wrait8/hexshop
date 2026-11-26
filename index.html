@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>HEXVAULT – Pentest gear for authorized testing</title>
+<title>HEXLAB – Pentest gear for authorized testing</title>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:dark;--bg:#000;--p:#0c0c0c;--ln:#222;--tx:#f2f2f2;--mu:#7d7d7d;--r:#a97cff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -86,7 +86,7 @@ footer input{background:var(--p);border:1px solid #2c2c2c;border-radius:6px;padd
 .hero h1{font-size:clamp(44px,7.4vw,118px);line-height:.95;margin:0 0 26px}
 .kick{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--r)!important;margin:0 0 18px!important}
 .trust{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}.trust span{font-size:12px;color:#aaa;border:1px solid #262626;border-radius:999px;padding:5px 12px}.trust span::before{content:"✓ ";color:var(--r)}
-.floor{position:absolute;left:-20%;right:-20%;bottom:-5%;height:60%;background-image:linear-gradient(rgba(169,124,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(169,124,255,.3) 1px,transparent 1px);background-size:64px 64px;transform:perspective(420px) rotateX(64deg);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(transparent,#000 70%);mask-image:linear-gradient(transparent,#000 70%);animation:gr 2.5s linear infinite}
+.floor{position:absolute;left:-20%;right:-20%;bottom:-5%;height:58%;z-index:1;background-image:linear-gradient(rgba(169,124,255,.8) 2px,transparent 2px),linear-gradient(90deg,rgba(169,124,255,.8) 2px,transparent 2px);background-size:64px 64px;transform:perspective(420px) rotateX(64deg);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(transparent,#000 70%);mask-image:linear-gradient(transparent,#000 70%);filter:drop-shadow(0 0 6px rgba(169,124,255,.6));animation:gr 2.5s linear infinite}
 @keyframes gr{to{background-position:0 64px}}
 .win{background:#060606;border:1px solid #2a2a2a;border-radius:12px;box-shadow:0 30px 80px rgba(169,124,255,.18);overflow:hidden}
 .wb{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #222;background:#0d0d0d;font-size:12px;color:var(--mu)}
@@ -111,7 +111,7 @@ footer input{background:var(--p);border:1px solid #2c2c2c;border-radius:6px;padd
 .ov{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.78);display:grid;place-items:center;padding:16px}.ov[hidden]{display:none}
 .pdp{position:fixed;inset:0;z-index:45;background:#000;overflow:auto;padding:90px 5vw 70px;padding-top:calc(90px + env(safe-area-inset-top,0px))}.pdp[hidden]{display:none}
 .pdg{display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:start;max-width:1200px;margin:0 auto}
-.pdv{aspect-ratio:1;border:1px solid var(--ln);border-radius:20px;display:grid;place-items:center;background:radial-gradient(circle at 50% 110%,#2a1d4a,#050505 70%);color:var(--r);overflow:hidden;position:sticky;top:20px}.pdv svg{width:52%}.pdv img{width:100%;height:100%;object-fit:cover}
+.pdv{aspect-ratio:1;border:1px solid var(--ln);border-radius:20px;display:grid;place-items:center;background:radial-gradient(circle at 50% 110%,#2a1d4a,#050505 70%);color:var(--r);overflow:hidden}.pdv svg{width:52%}.pdv img{width:100%;height:100%;object-fit:cover}
 .pdp h1{font:800 clamp(30px,5vw,60px)/1 'Unbounded',sans-serif;letter-spacing:-.04em;margin:8px 0 14px}.pdp .pp{font:800 34px 'Unbounded',sans-serif;margin:16px 0}
 .bd{display:inline-block;font-size:11px;border-radius:999px;padding:3px 10px;border:1px solid var(--r);color:var(--r)}.bd.out{border-color:#555;color:#999}.bd.ok{border-color:#2a2a2a;color:#9a9a9a}
 .qt{display:flex;align-items:center;gap:6px}.qt button:not(.btn){width:38px;height:38px;border-radius:6px;border:1px solid #333;background:transparent;color:var(--tx);font-size:18px;cursor:pointer}.qt b{min-width:34px;text-align:center}
@@ -151,26 +151,47 @@ footer input{background:var(--p);border:1px solid #2c2c2c;border-radius:6px;padd
 @media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:120px}.scr{display:none}.adm{grid-template-columns:1fr;grid-template-rows:auto 1fr}.as{flex-direction:row;overflow:auto;border-right:0;border-bottom:1px solid var(--ln);padding:10px}.al2{display:none}#admc{padding:18px 16px 60px}.two{grid-template-columns:1fr}}
 .hero{display:flex;flex-direction:column;justify-content:center;grid-template-columns:none}.hero h1{font-size:clamp(44px,7.4vw,118px);margin-bottom:26px}.hero p{max-width:56ch}
 .hero>.hl{position:relative;z-index:2}
-.floor{position:absolute;left:-20%;right:-20%;bottom:-5%;height:58%;z-index:1;background-image:linear-gradient(rgba(169,124,255,.32) 1px,transparent 1px),linear-gradient(90deg,rgba(169,124,255,.32) 1px,transparent 1px);background-size:64px 64px;transform:perspective(420px) rotateX(64deg);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(transparent,#000 70%);mask-image:linear-gradient(transparent,#000 70%);animation:gr 2.5s linear infinite}
+
 @keyframes gr{to{background-position:0 64px}}
 @media(prefers-reduced-motion:reduce){.floor{animation:none}}
-@media(max-width:860px){.hero{padding-top:120px}.floor{height:42%}}
+@media(max-width:860px){.hero{padding-top:120px}}
 .pay{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0}.qrb{background:#fff;padding:10px;border-radius:10px;width:200px;height:200px;display:grid;place-items:center}.pf{flex:1 1 220px;display:flex;flex-direction:column;gap:10px}.pr2{display:grid;grid-template-columns:62px 1fr auto;gap:8px;align-items:center;font-size:12px}.pr2 span{color:var(--mu)}.pr2 code{word-break:break-all;font-size:11px}.ab{background:transparent;border:1px solid #333;color:var(--tx);border-radius:6px;padding:5px 10px;cursor:pointer;font:500 12px 'JetBrains Mono',monospace}
 .btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;line-height:1.2}
 .qt .btn{width:auto;height:auto;padding:12px 26px;font-size:14px;margin-left:10px}
 .pbtn{display:flex;width:100%;padding:16px;font-size:16px;margin:8px 0 14px}
 .dt{margin:0 0 14px;font-size:13px;color:var(--mu)}.dt summary{cursor:pointer}
 .wl{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid #2a2a2a;border-radius:12px;margin-top:10px;font-weight:500;font-size:15px}.wl:hover{border-color:var(--r);background:#0e0e0e}.wl i{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-weight:800;color:#000;font-size:13px;flex:none}.wl small{display:block;color:var(--mu);font-weight:400;font-size:12px}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.cc{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--p);border:1px solid var(--ln);border-radius:18px;padding:26px;color:var(--tx);font:inherit;cursor:pointer;transition:border-color .25s,transform .25s,background .25s}
+.cc:hover{border-color:var(--r);transform:translateY(-5px);background:#120d1f}
+.cc .ci{width:54px;color:var(--mu);margin-bottom:14px;transition:color .25s}.cc:hover .ci{color:var(--r)}
+.cc b{font:800 22px 'Unbounded',sans-serif;letter-spacing:-.03em}.cc>span:not(.ci){color:var(--mu);font-size:13px}.cc small{margin-top:14px;color:var(--r);font-size:12px}
+.sun{position:absolute;left:50%;transform:translateX(-50%);--s:clamp(280px,46vw,640px);width:var(--s);height:calc(var(--s)/2);bottom:calc(369px - 5%);border-radius:50% 50% 0 0/100% 100% 0 0;background:linear-gradient(#d9c2ff,#9566f2 50%,#4c1d95);opacity:.6;z-index:0;-webkit-mask-image:linear-gradient(#000 52%,transparent 52% 58%,#000 58% 71%,transparent 71% 78%,#000 78% 89%,transparent 89% 96%,#000 96%);mask-image:linear-gradient(#000 52%,transparent 52% 58%,#000 58% 71%,transparent 71% 78%,#000 78% 89%,transparent 89% 96%,#000 96%)}
+.sung{position:absolute;left:50%;transform:translateX(-50%);width:min(1000px,130vw);height:460px;bottom:calc(369px - 5%);background:radial-gradient(ellipse at 50% 100%,rgba(169,124,255,.5),transparent 65%);z-index:0;pointer-events:none}
+.hz{position:absolute;left:0;right:0;bottom:calc(369px - 5%);height:2px;background:linear-gradient(90deg,transparent,#a97cff 30%,#fff 50%,#a97cff 70%,transparent);box-shadow:0 0 22px #a97cff;z-index:1}
+.hero h1{text-shadow:0 2px 24px rgba(0,0,0,.7);animation:gl 5s infinite}
+.hero h1:hover{animation-duration:.6s}
+@keyframes gl{0%,90%,100%{transform:none;text-shadow:0 2px 24px rgba(0,0,0,.7);clip-path:none}91%{transform:translate(-4px,1px);text-shadow:5px 0 #a97cff,-5px 0 #fff;clip-path:inset(8% 0 58% 0)}92%{transform:translate(4px,-1px);text-shadow:-5px 0 #a97cff,5px 0 #fff;clip-path:inset(52% 0 8% 0)}93%{transform:translate(-2px,0);text-shadow:4px 0 #a97cff,-4px 0 #fff;clip-path:inset(0 0 72% 0)}94%{transform:none;text-shadow:0 2px 24px rgba(0,0,0,.7);clip-path:none}95%{transform:translate(3px,0);text-shadow:-4px 0 #a97cff,4px 0 #fff;clip-path:inset(30% 0 30% 0)}96%{transform:none;text-shadow:0 2px 24px rgba(0,0,0,.7);clip-path:none}}
+@media(min-width:861px){.sun{--s:clamp(220px,21vw,340px);left:auto;right:6vw;transform:none}.sung{left:auto;right:calc(6vw - 160px);transform:none;width:min(680px,52vw)}.hz{left:auto;right:0;width:46%;background:linear-gradient(90deg,transparent,#a97cff 35%,#fff 78%,transparent)}}
+.fg{position:absolute;inset:0;z-index:2;pointer-events:none}
+.fi{position:absolute;pointer-events:auto;display:block;width:var(--w,84px);color:var(--r);--p:1;transform:translate(-50%,-50%) translate(calc(var(--mx,0)*var(--p)*18px),calc(var(--my,0)*var(--p)*18px));transition:transform .3s ease-out}
+.fi:nth-child(1){left:63%;top:20%;--p:1.3;--w:92px}.fi:nth-child(2){left:83%;top:34%;--p:.8;--w:78px}.fi:nth-child(3){left:71%;top:58%;--p:1.6;--w:100px}.fi:nth-child(4){left:89%;top:71%;--p:1;--w:84px}
+.fb{display:block;animation:fb 6s ease-in-out infinite;animation-delay:var(--dl,0s);filter:drop-shadow(0 0 10px rgba(169,124,255,.65));transition:scale .25s,color .25s}
+.fb svg{width:100%;display:block}
+.fi:hover .fb,.fi:focus-visible .fb{scale:1.14;color:#fff;filter:drop-shadow(0 0 18px #a97cff)}
+.ft{position:absolute;left:50%;top:100%;transform:translate(-50%,6px);white-space:nowrap;background:#0b0b0b;border:1px solid var(--r);border-radius:999px;padding:5px 12px;font-size:12px;color:var(--tx);opacity:0;transition:opacity .2s;pointer-events:none}
+.fi:hover .ft,.fi:focus-visible .ft{opacity:1}
+@keyframes fb{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-16px) rotate(3deg)}}
+@media(max-width:860px){.fi:nth-child(1){left:12%;top:76%;--w:58px}.fi:nth-child(2){left:36%;top:84%;--w:52px}.fi:nth-child(3){left:60%;top:77%;--w:60px}.fi:nth-child(4){left:84%;top:85%;--w:52px}.ft{font-size:11px}}
+.hero{align-items:flex-start}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-/* ===== EDIT THESE ===== */
+/* ===== SHOP SETTINGS ===== */
 window.HV_CONFIG={
-  tonAddr:'UQDumOkL-njb-WFGwoVCTBurAnGoQ45EgI7yEpg17D_Udobf',
-  tonRate:3.50,  /* price of 1 TON in USD, update when it moves */
+  tonAddr:'UQBY9iep0k-9o8ZvJGAnkPBrZTC0Hm-UfrZaYgl7azPido2o',
   manifestUrl:'https://wrait8.github.io/hexshop/tonconnect-manifest.json',
-  orderEndpoint:'', /* e.g. your Formspree URL, it emails you every order */
-  announce:'Free shipping over $150 | Dispatch in 24 hours | 30-day returns'
+  orderEndpoint:'' /* paste your Formspree URL here so every order is emailed to you */
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js"></script>
@@ -179,26 +200,27 @@ window.HV_CONFIG={
 <body>
 <div class="bar" id="bar"></div>
 <nav>
-  <a class="logo" href="#top">HEX<b>VAULT</b></a>
-  <a class="l" href="#shop">Shop</a><a class="l" href="#kits">Kits</a><a class="l" href="#rules">Rules</a>
+  <a class="logo" href="#top">HEX<b>LAB</b></a>
+  <a class="l" href="#shop">Shop</a><a class="l" href="#cats">Categories</a><a class="l" href="#rules">Rules</a>
   <button class="cb" id="acb" style="background:transparent;border:1px solid #333;color:var(--tx)">Sign in</button>
   <button class="cb" id="cb">Cart (<span id="cc">0</span>)</button>
 </nav>
 
 <header class="hero" id="top">
+  <!-- horizon sun, add back later: <div class="sung"></div><div class="sun"></div><div class="hz"></div> -->
   <div class="floor" aria-hidden="true"></div>
   <div class="glow" id="glow" aria-hidden="true"></div>
   <div class="hl">
     <h1 id="h1">Break it<br><span>before they do.</span></h1>
     <p>Hardware for red teamers, wireless auditors and security labs.</p>
-    <div class="btns"><a class="btn p" href="#shop">Open the vault</a><a class="btn" href="#kits">Browse kits</a></div>
+    <div class="btns"><a class="btn p" href="#shop">Enter the lab</a><a class="btn" href="#cats">Shop by job</a></div>
   </div>
 </header>
 
 <div class="mq" aria-hidden="true"><div id="mq"></div></div>
 
 <section id="shop">
-  <h2>Inside the vault</h2>
+  <h2>Inside the lab</h2>
   <p class="sub">Filter by the job. Free shipping over $150, 30-day returns on unopened items.</p>
   <div class="tb"><div class="chips" id="chips" role="group" aria-label="Filter products"></div>
     <input id="q" type="search" placeholder="Search gadgets" aria-label="Search gadgets">
@@ -209,20 +231,16 @@ window.HV_CONFIG={
 
 <div style="overflow:hidden;padding:20px 0"><p class="big" id="big" aria-hidden="true">AUTHORIZED ONLY AUTHORIZED ONLY</p></div>
 
-<section id="kits">
-  <h2>Kits. Skip the shopping list.</h2>
-  <p class="sub">Pre-matched loadouts with a hard case and a printed quick-start card.</p>
-  <div class="stack">
-    <article class="sc"><div><h3>Wireless Audit</h3><p>Everything to map and test Wi-Fi and radio on your own site.</p><div class="price">$329</div></div><ul><li>Spectre SDR</li><li>Aircheck Dual adapter</li><li>Antenna set + hard case</li></ul></article>
-    <article class="sc"><div><h3>Red Team Drop</h3><p>Small implants and taps for authorized internal engagements.</p><div class="price">$289</div></div><ul><li>Dropbox Mini</li><li>Packet Pup LAN tap</li><li>Cable kit + scope letter template</li></ul></article>
-    <article class="sc"><div><h3>Hardware Bench</h3><p>Open up a device, find the debug port, read the firmware.</p><div class="price">$239</div></div><ul><li>Probe Pro Kit</li><li>Tag Reader Lite</li><li>Soldering starter + pouches</li></ul></article>
-  </div>
+<section id="cats">
+  <h2>Shop by job.</h2>
+  <p class="sub">Pick what you’re testing and see the gear built for it.</p>
+  <div class="cg" id="cg"></div>
 </section>
 
 <section>
   <div class="sp">
     <div class="rv"><h2>Trusted by labs in 48 countries.</h2><p class="sub">Independent testers, university labs and in-house security teams.</p>
-      <div class="num"><div><b data-n="12400">0</b><span>kits shipped</span></div><div><b data-n="48">0</b><span>countries</span></div><div><b data-n="24">0</b><span>hour dispatch</span></div></div></div>
+      <div class="num"><div><b data-n="12400">0</b><span>orders shipped</span></div><div><b data-n="48">0</b><span>countries</span></div><div><b data-n="24">0</b><span>hour dispatch</span></div></div></div>
     <div class="term rv" id="term" aria-label="Example terminal"></div>
   </div>
 </section>
@@ -238,13 +256,11 @@ window.HV_CONFIG={
 </section>
 
 <footer>
-  <div><b style="color:var(--tx)">HEXVAULT</b><br>Pentest gear for authorized testing.<br>© 2026 Hexvault Labs</div>
+  <div><b style="color:var(--tx)">HEXLAB</b><br>Pentest gear for authorized testing.<br>© 2026 Hexlab Labs</div>
   <form id="nl"><input type="email" required placeholder="you@lab.net" aria-label="Email address"><button class="btn p">Restock alerts</button></form>
 </footer>
 
 <button class="cb" id="adb" style="position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:25;display:none">Admin dashboard</button>
-<div class="adm" id="adm" hidden></div>
-<div id="tch" hidden><div id="tcb"></div></div>
 <div class="ov" id="ck" hidden><div class="adi"><div style="display:flex;justify-content:space-between;align-items:center"><h3 class="d" style="margin:0;font-size:18px">Checkout</h3><button class="chip" id="ckx">Close</button></div><div id="ckc"></div></div></div>
 <div class="ov" id="wp" hidden style="z-index:65"><div class="adi"><div style="display:flex;justify-content:space-between;align-items:center"><h3 class="d" style="margin:0;font-size:18px">Choose your wallet</h3><button class="chip" id="wpx">Close</button></div><div id="wpc"></div></div></div>
 <div class="ov" id="ac2" hidden><div class="adi"><div style="display:flex;justify-content:space-between;align-items:center"><h3 class="d" style="margin:0;font-size:18px">Account</h3><button class="chip" id="ac2x">Close</button></div><div id="ac2c"></div></div></div>
@@ -272,17 +288,17 @@ const SEED=[['Packet Pup','Network',89,'Pocket LAN tap with passive capture and 
 ['Tag Reader Lite','Hardware',99,'Reads and clones low-frequency access tags you own. 10 blank cards.','chip',0,'Frequency: 125 kHz|Range: 5 cm|Includes: 10 blank cards'],
 ['Faraday Pouch x3','Hardware',34,'Signal-blocking pouches for evidence handling and bench work.','rect',40,'Pack: 3 pouches|Size: Phone and tablet|Shielding: Multi-layer']].map((x,i)=>({id:'s'+i,name:x[0],cat:x[1],price:x[2],desc:x[3],icon:x[4],stock:x[5],spec:x[6],feat:[1,4,5].includes(i)}));
 const T=['Free shipping over $150','Spectre SDR back in stock','Lab guides on every product','Dispatch in 24 hours','30-day returns'];
-const HV=window.HV_CONFIG||{};let SET={tonAddr:HV.tonAddr||'',tonRate:Number(HV.tonRate)||0,announce:HV.announce||''};function mq(){const a=SET.announce?SET.announce.split('|').map(x=>x.trim()).filter(Boolean):T;$('mq').innerHTML=[...a,...a,...a,...a].map(t=>`<span>/// ${E(t)}</span>`).join('')}
+const HV=window.HV_CONFIG||{};let DATA_OK=false;let SET={tonAddr:HV.tonAddr||'',tonRate:0,announce:''};function mq(){const a=SET.announce?SET.announce.split('|').map(x=>x.trim()).filter(Boolean):T;$('mq').innerHTML=[...a,...a,...a,...a].map(t=>`<span>/// ${E(t)}</span>`).join('')}
 let DB=[],cat='All',view='grid',qs='',sort='feat',cart=[],PQ=1,ME=null,UA=null,DX=null,col=null;
 const E=t=>String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const allP=()=>[...DB,...SEED.filter(s=>!DB.some(d=>d.id===s.id))];const all=()=>allP().filter(x=>!x.hidden);const byId=id=>all().find(x=>x.id===id);
-const art=x=>x.img&&/^(\/_blob\/|https:\/\/)/.test(x.img)?`<img src="${E(x.img)}" alt="${E(x.name)}" loading="lazy">`:(ic[x.icon]||ic.rect);
+const allP=()=>DATA_OK?DB:[...DB,...SEED.filter(s=>!DB.some(d=>d.id===s.id))];const all=()=>allP().filter(x=>!x.hidden);const byId=id=>all().find(x=>x.id===id);
+const art=x=>x.img&&/^(\/_blob\/|https:\/\/|images\/)/.test(x.img)?`<img src="${E(x.img)}" alt="${E(x.name)}" loading="lazy">`:(ic[x.icon]||ic.rect);
 const stk=x=>(x.stock===undefined||x.stock===null||x.stock==='')?Infinity:Number(x.stock);
 const bdg=x=>{const n=stk(x);return n<=0?'<span class="bd out">Sold out</span>':n<=5?`<span class="bd">Only ${n} left</span>`:'<span class="bd ok">In stock</span>'};
 const cnt=id=>cart.filter(i=>i===id).length;
 const ls=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}};
 const K=k=>k+'_'+(ME?ME.id:'g');
-function chips(){const c=['All',...new Set(all().map(x=>x.cat))];if(!c.includes(cat))cat='All';$('chips').innerHTML=c.map(x=>`<button class="chip" aria-pressed="${x===cat}" data-c="${E(x)}">${E(x)}</button>`).join('')}
+function chips(){setTimeout(catsr,0);const c=['All',...new Set(all().map(x=>x.cat))];if(!c.includes(cat))cat='All';$('chips').innerHTML=c.map(x=>`<button class="chip" aria-pressed="${x===cat}" data-c="${E(x)}">${E(x)}</button>`).join('')}
 const act=x=>stk(x)<=0?`<button class="add nt" data-n="${E(x.id)}">Notify me</button>`:`<button class="add" data-id="${E(x.id)}">Add</button>`;
 function list(){let a=all().filter(x=>(cat==='All'||x.cat===cat)&&(x.name+' '+x.desc+' '+x.cat).toLowerCase().includes(qs));
 if(sort==='lo')a.sort((p,q)=>p.price-q.price);if(sort==='hi')a.sort((p,q)=>q.price-p.price);
@@ -309,20 +325,21 @@ const shp=()=>(sub()>=150&&CK.ship==='std')?0:SH[CK.ship][1];
 const AF=[['name','Full name','w'],['phone','Phone',''],['zip','Postal code',''],['l1','Street address','w'],['city','City',''],['country','Country','']];
 const addrTxt=a=>[a.name,a.l1,[a.zip,a.city].filter(Boolean).join(' '),a.country,a.phone].filter(Boolean).map(E).join('<br>');
 $('co').onclick=()=>{if(!cart.length){$('co').textContent='Add something first';setTimeout(()=>$('co').textContent='Checkout',1500);return}CK.s=1;CK.err='';CK.done=null;CK.oid='HV-'+Math.random().toString(36).slice(2,8).toUpperCase();CK.tx='';CK.paid=false;CK.a=ls(K('hv_addr'))||{};CK.ok=false;$('dr').classList.remove('open');$('ck').hidden=false;ckr()};
-function ckr(){const tb=$('tcb');if(tb&&$('tch'))$('tch').appendChild(tb);const st=['Cart','Address','Delivery','Payment','Review'];let h='';
+function ckr(){const st=['Cart','Address','Delivery','Payment','Review'];let h='';
 if(!CK.done)h+=`<div class="stp">${st.map((t,i)=>`<span class="${CK.s>i+1?'dn':CK.s===i+1?'on':''}">${i+1}. ${t}</span>`).join('')}</div>`;
 if(CK.done)h+=`<h3 class="d" style="font-size:20px">Order placed</h3><p>Your order number is <b>${E(CK.done)}</b>. We’ll confirm your payment on the blockchain, then pack and ship your order. You can follow the status in your account.</p><button class="btn p" data-go="close">Back to shop</button>`;
 else if(CK.s===1)h+=[...new Set(cart)].map(id=>{const x=byId(id),n=cnt(id);return `<div class="sm"><span>${E(x.name)} × ${n}</span><span>$${x.price*n}</span></div>`}).join('')+`<div class="sm"><b>Subtotal</b><b>$${sub()}</b></div><p class="er">${E(CK.err)}</p><button class="btn p" data-go="next">Continue to address</button>`;
 else if(CK.s===2)h+=(ME?'':'<p style="color:var(--mu);font-size:13px">Sign in to keep your address for next time.</p>')+`<div class="f"><div class="ck2">${AF.map(f=>`<label class="${f[2]}">${f[1]}<input data-a="${f[0]}" value="${E(CK.a[f[0]]||'')}"></label>`).join('')}</div><label style="flex-direction:row;align-items:center;gap:8px"><input type="checkbox" id="cks" ${CK.sv?'checked':''} style="accent-color:#a97cff"> Save this address for future orders</label></div><p class="er">${E(CK.err)}</p><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" data-go="back">Back</button><button class="btn p" data-go="next">Continue to delivery</button></div>`;
 else if(CK.s===3)h+=`<div class="f">${Object.entries(SH).map(([k,v])=>`<label class="ro"><input type="radio" name="sh" value="${k}" ${CK.ship===k?'checked':''}><span>${v[0]}<br><span style="color:var(--mu)">${k==='std'&&sub()>=150?'Free':'$'+v[1]}</span></span></label>`).join('')}<label class="ro"><input type="checkbox" id="cka" ${CK.ok?'checked':''}><span>I will only use this equipment on systems I own or have written permission to test, and it is legal where I live.</span></label></div><p class="er">${E(CK.err)}</p><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" data-go="back">Back</button><button class="btn p" data-go="next">Review order</button></div>`;
 else if(CK.s===4)h+=payHtml();else h+=[...new Set(cart)].map(id=>{const x=byId(id),n=cnt(id);return `<div class="sm"><span>${E(x.name)} × ${n}</span><span>$${x.price*n}</span></div>`}).join('')+`<div class="sm"><span>Shipping (${SH[CK.ship][0]})</span><span>$${shp()}</span></div><div class="sm"><b>Total</b><b>$${sub()+shp()}</b></div><p style="font-size:13px;color:var(--mu)">Ship to:<br>${addrTxt(CK.a)}</p><p style="font-size:13px;color:var(--mu)">Payment: ${payAmt()} ${CK.cur}, comment ${E(CK.oid)}</p><div style="display:flex;gap:8px"><button class="btn" data-go="back">Back</button><button class="btn p" data-go="place">Place order</button></div>`;
-$('ckc').innerHTML=h;if(CK.s===4&&!CK.done){qr();if($('tcslot')&&$('tcb'))$('tcslot').appendChild($('tcb'))}}
-$('ckc').onclick=e=>{if(e.target.dataset.tcpay){tcPay();return}if(e.target.dataset.wp){openWp();return}const cu=e.target.dataset.cur;if(cu){CK.cur=cu;CK.paid=false;ckr();return}const cp=e.target.dataset.cp;if(cp!==undefined){try{navigator.clipboard.writeText(cp)}catch(x){}e.target.textContent='Copied';return}const g=e.target.dataset.go;if(!g)return;CK.err='';
+$('ckc').innerHTML=h;if(CK.s===4&&!CK.done)qr()}
+$('ckc').onclick=async e=>{if(e.target.dataset.tcc){TC.openModal();return}if(e.target.dataset.tcd){TC.disconnect();return}if(e.target.dataset.tcpay){tcPay();return}if(e.target.dataset.wp){openWp();return}const cu=e.target.dataset.cur;if(cu){CK.cur=cu;CK.paid=false;ckr();return}const cp=e.target.dataset.cp;if(cp!==undefined){try{navigator.clipboard.writeText(cp)}catch(x){}e.target.textContent='Copied';return}const g=e.target.dataset.go;if(!g)return;CK.err='';
 if(g==='close'){$('ck').hidden=true;return}
 if(g==='back'){CK.s--;ckr();return}
 if(g==='next'){if(CK.s===2){document.querySelectorAll('[data-a]').forEach(i=>CK.a[i.dataset.a]=i.value.trim());CK.sv=$('cks').checked;if(!['name','l1','city','zip','country'].every(k=>CK.a[k])){CK.err='Please fill in name, street, city, postal code and country.';ckr();return}}
 if(CK.s===3){const r=document.querySelector('[name=sh]:checked');if(r)CK.ship=r.value;CK.ok=$('cka').checked;if(!CK.ok){CK.err='Please confirm authorized use to continue.';ckr();return}}
 if(CK.s===4){if(!tonOK()){CK.err='TON payment is not available yet.';ckr();return}CK.tx=$('ckt')?$('ckt').value.trim():'';CK.paid=!!($('ckp')&&$('ckp').checked);if(!CK.paid){CK.err='Please send the payment first, then tick the box.';ckr();return}}
+if(CK.s===3)await livePrice();
 CK.s++;ckr();return}
 if(g==='place'){const o={type:'order',id:CK.oid,items:[...new Set(cart)].map(id=>({n:byId(id).name,q:cnt(id)})),total:sub()+shp(),addr:CK.a,status:'Awaiting payment',pay:{m:CK.cur,amt:payAmt(),tx:CK.tx,boc:CK.boc},ts:Date.now()};
 const L=ls(K('hv_orders'))||[];L.unshift(o);ls(K('hv_orders'),L);if(CK.sv){ls(K('hv_addr'),CK.a);try{ME&&DX&&DX.collection('data/users/'+ME.id).doc('addr').set({type:'addr',...CK.a,ts:Date.now()}).catch(()=>{})}catch(x){}}
@@ -332,7 +349,10 @@ cart=[];draw();CK.done=o.id;ckr()}};
 $('ckx').onclick=()=>$('ck').hidden=true;
 const JM='EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs';
 const uq=()=>{let h=0;for(const c of CK.oid)h=(h*31+c.charCodeAt(0))%90;return (h+10)/10000};
-const tonAmt=()=>SET.tonRate>0?Math.round((Math.ceil((sub()+shp())/SET.tonRate*100)/100+uq())*10000)/10000:0;
+let LIVE=0,LIVET=0;
+const rt=()=>LIVE>0?LIVE:(Number(SET.tonRate)||0);
+async function livePrice(){if(LIVE&&Date.now()-LIVET<60000)return LIVE;for(const t of ['ton','gram']){try{const r=await fetch('https://tonapi.io/v2/rates?tokens='+t+'&currencies=usd');if(!r.ok)continue;const j=await r.json(),v=Object.values(j.rates||{})[0],p=v&&v.prices&&(v.prices.USD??v.prices.usd);if(p>0){LIVE=p;LIVET=Date.now();return p}}catch(e){}}return 0}
+const tonAmt=()=>rt()>0?Math.round((Math.ceil((sub()+shp())/rt()*100)/100+uq())*10000)/10000:0;
 const payAmt=()=>CK.cur==='USDT'?Math.ceil((sub()+shp())*100)/100:tonAmt();
 const hasAddr=()=>!!(SET.tonAddr&&SET.tonAddr.length>=40);
 const tonOK=()=>hasAddr()&&payAmt()>0;
@@ -341,7 +361,7 @@ const tonUri=()=>CK.cur==='USDT'?`ton://transfer/${SET.tonAddr}?jetton=${JM}&amo
 function payHtml(){const back='<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" data-go="back">Back</button>';
 if(!hasAddr())return `<p>Payments aren’t switched on yet. The shop owner still needs to add a wallet address in the admin Settings.</p>${back}</div>`;
 if(!tonOK())return `<p>TON payments aren’t available right now. The shop owner still needs to set the TON price in Settings.</p>${back}</div>`;
-const am=payAmt();return `<p style="color:var(--mu);font-size:13px">Total $${sub()+shp()} = <b style="color:var(--tx)">${am} TON</b>. Tap the button and pick your TON wallet app. The amount, address and order comment are filled in for you. Send the exact amount: its last digits identify your order.</p>${TC?`<div id="tcslot" style="margin:8px 0 12px"></div>${TC.connected?`<button class="btn p pbtn" data-tcpay="1">Pay ${am} TON</button>`:''}<button class="chip" data-wp="1" style="margin-bottom:12px">Other ways to pay</button>`:`<button class="btn p pbtn" data-wp="1">Pay with TON</button>`}<details class="dt"><summary>Button not opening? Pay from another device</summary><div class="pay"><div class="qrb" id="qrb"></div><div class="pf"><div class="pr2"><span>Amount</span><b>${am} TON</b><button class="ab" data-cp="${am}">Copy</button></div><div class="pr2"><span>Address</span><code>${E(SET.tonAddr)}</code><button class="ab" data-cp="${E(SET.tonAddr)}">Copy</button></div><div class="pr2"><span>Comment</span><b>${E(CK.oid)}</b><button class="ab" data-cp="${E(CK.oid)}">Copy</button></div></div></div></details><div class="f"><label>Transaction hash (optional, helps us find it faster)<input id="ckt" value="${E(CK.tx)}"></label><label class="ro"><input type="checkbox" id="ckp" ${CK.paid?'checked':''}><span>I have sent the payment</span></label></div><p class="er">${E(CK.err)}</p>${back}<button class="btn p" data-go="next">Review order</button></div>`}
+const am=payAmt();return `<p style="color:var(--mu);font-size:13px">Total $${sub()+shp()} = <b style="color:var(--tx)">${am} TON</b> (1 TON ≈ $${rt().toFixed(2)}${LIVE?', live price':''}). Tap the button and pick your TON wallet app. The amount, address and order comment are filled in for you. Send the exact amount: its last digits identify your order.</p>${TC?(TC.connected?`<button class="btn p pbtn" data-tcpay="1">Pay ${am} TON</button><button class="chip" data-tcd="1" style="margin-bottom:12px">Disconnect wallet</button> `:`<button class="btn p pbtn" data-tcc="1">Connect wallet to pay</button>`)+`<button class="chip" data-wp="1" style="margin-bottom:12px">Other ways to pay</button>`:`<button class="btn p pbtn" data-wp="1">Pay with TON</button>`}<details class="dt"><summary>Button not opening? Pay from another device</summary><div class="pay"><div class="qrb" id="qrb"></div><div class="pf"><div class="pr2"><span>Amount</span><b>${am} TON</b><button class="ab" data-cp="${am}">Copy</button></div><div class="pr2"><span>Address</span><code>${E(SET.tonAddr)}</code><button class="ab" data-cp="${E(SET.tonAddr)}">Copy</button></div><div class="pr2"><span>Comment</span><b>${E(CK.oid)}</b><button class="ab" data-cp="${E(CK.oid)}">Copy</button></div></div></div></details><div class="f"><label>Transaction hash (optional, helps us find it faster)<input id="ckt" value="${E(CK.tx)}"></label><label class="ro"><input type="checkbox" id="ckp" ${CK.paid?'checked':''}><span>I have sent the payment</span></label></div><p class="er">${E(CK.err)}</p>${back}<button class="btn p" data-go="next">Review order</button></div>`}
 function openWp(){const ad=SET.tonAddr,nano=Math.round(payAmt()*1e9),am=payAmt(),tx=encodeURIComponent(CK.oid);
 const W=[['Tonkeeper','#3aa0ff','T',tkUri(),'Opens the Tonkeeper app'],['MyTonWallet','#e6e6e6','M',`https://my.tt/transfer/${ad}?amount=${nano}&text=${tx}`,'Opens the MyTonWallet app'],['Telegram Wallet','#2aabee','TG',`https://t.me/sendgrams?to=${ad}&amount=${am}`,'Opens Wallet in Telegram. Paste the comment below yourself.'],['Other TON wallet','#a97cff','···',tonUri(),'Opens any TON wallet installed on your phone']];
 $('wpc').innerHTML=`<p style="color:var(--mu);font-size:13px">Pay <b style="color:var(--tx)">${am} TON</b>. Pick the app you use and it opens with the payment ready.</p>${W.map(w=>`<a class="wl" href="${E(w[3])}" target="_blank" rel="noopener"><i style="background:${w[1]}">${w[2]}</i><span>${w[0]}<small>${w[4]}</small></span></a>`).join('')}<div class="pr2" style="margin-top:16px"><span>Comment</span><b>${E(CK.oid)}</b><button class="ab" data-cp="${E(CK.oid)}">Copy</button></div><p style="color:var(--mu);font-size:12px">After you confirm in your wallet, come back and tick “I have sent the payment”.</p>`;$('wp').hidden=false}
@@ -390,7 +410,7 @@ DX.collection('settings').doc('site').onSnapshot(sn=>{SET=sn.exists?sn.data():{}
 if(!(UA&&await UA.canEdit()))return;const assets=await claude.use('assets');
 DX.collection('orders').onSnapshot(sn=>{ORD=sn.docs.map(d=>({...d.data(),uid:d.id}));admr(1)},()=>{});
 DX.collection('notify').onSnapshot(sn=>{NTF=sn.docs.map(d=>({...d.data(),uid:d.id}));admr(1)},()=>{});
-$('adm').innerHTML=`<div class="as"><div class="al2">HEX<span style="color:var(--r)">VAULT</span> admin</div>${[['ov','Overview'],['pr','Products'],['or','Orders'],['nf','Restock alerts'],['st','Settings']].map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join('')}<button data-t="x" style="margin-top:auto">Close ✕</button></div><main id="admc"></main>`;
+$('adm').innerHTML=`<div class="as"><div class="al2">HEX<span style="color:var(--r)">LAB</span> admin</div>${[['ov','Overview'],['pr','Products'],['or','Orders'],['nf','Restock alerts'],['st','Settings']].map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join('')}<button data-t="x" style="margin-top:auto">Close ✕</button></div><main id="admc"></main>`;
 $('adb').style.display='block';$('adb').onclick=()=>{$('adm').hidden=false;document.body.style.overflow='hidden';admr()};
 const sv=(x,d)=>col.doc(x).set(d);
 const tOv=()=>{const P=allP(),fin=P.filter(x=>stk(x)!==Infinity),O=ordsAll(),ok=O.filter(o=>!['Cancelled','Awaiting payment','New'].includes(o.status||'New'));
@@ -404,7 +424,7 @@ return `<h2>Products</h2><div style="display:flex;gap:8px;flex-wrap:wrap;margin-
 const tOr=()=>{const O=ordsAll();return `<h2>Orders</h2>${SET.tonAddr?`<p style="margin:0 0 14px"><a class="ab" href="https://actonscan.com/address/${E(SET.tonAddr)}?network=mainnet" target="_blank" rel="noopener">Open wallet history ↗</a> <span style="color:var(--mu);font-size:12px">Match each payment by its exact amount or comment, then set the order to Paid.</span></p>`:''}${O.length?`<div class="tw"><table class="tbl"><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Date</th><th>Status</th></tr>${O.map(o=>`<tr><td><b>${E(o.id)}</b></td><td>${E(o.cn)}<details><summary style="color:var(--mu);cursor:pointer">Ship to</summary><span style="color:var(--mu)">${addrTxt(o.addr||{})}</span></details></td><td>${(o.items||[]).map(i=>E(i.n)+' × '+E(i.q)).join('<br>')}</td><td>${money(o.total)}${o.pay?`<br><span style="color:var(--mu);word-break:break-all">${E(o.pay.amt)} ${E(o.pay.m||'TON')}<br>${/^[0-9a-fA-F]{64}$/.test(o.pay.tx||'')?`<a href="https://actonscan.com/tx/${E(o.pay.tx)}?network=mainnet" target="_blank" rel="noopener" style="color:var(--r)">View tx ↗</a>`:E(o.pay.tx||'no tx given')}</span>`:''}</td><td>${new Date(o.ts).toLocaleDateString()}</td><td><select data-os="${E(o.uid)}|${E(o.id)}">${['Awaiting payment','Paid','Packed','Shipped','Delivered','Cancelled'].map(t=>`<option ${(o.status||'New')===t?'selected':''}>${t}</option>`).join('')}</select></td></tr>`).join('')}</table></div>`:'<p style="color:var(--mu)">No orders yet. Orders from signed-in customers show up here live.</p>'}`};
 const tNf=()=>{const g={};NTF.forEach(u=>(u.reqs||[]).forEach(r=>{(g[r.id]=g[r.id]||[]).push(r.email)}));const ks=Object.keys(g);
 return `<h2>Restock alerts</h2>${ks.length?ks.map(k=>{const x=allP().find(y=>y.id===k);return `<h4>${E(x?x.name:k)} · ${g[k].length} waiting</h4><p style="font-size:13px;color:#bbb">${[...new Set(g[k])].map(E).join('<br>')}</p>`}).join(''):'<p style="color:var(--mu)">Nobody is waiting on a sold-out item yet.</p>'}`};
-const tSt=()=>`<h2>Settings</h2><div class="f" style="max-width:560px"><label>Tonkeeper wallet address (customers pay TON here)<input id="s_w" value="${E(SET.tonAddr||'')}" placeholder="UQ..."></label><label>TON price in USD (update it when the price moves)<input id="s_r" type="number" min="0" step="0.01" value="${E(SET.tonRate||'')}" placeholder="3.50"></label><label>Ticker messages, separated by |<textarea id="s_a" rows="3" placeholder="Free shipping over $150 | Dispatch in 24 hours">${E(SET.announce||'')}</textarea></label><button class="btn p" data-ss="1" style="align-self:flex-start">Save settings</button></div>`;
+const tSt=()=>`<h2>Settings</h2><div class="f" style="max-width:560px"><label>Tonkeeper wallet address (customers pay TON here)<input id="s_w" value="${E(SET.tonAddr||'')}" placeholder="UQ..."></label><label>TON price in USD (only used if the live price can’t be loaded)<input id="s_r" type="number" min="0" step="0.01" value="${E(SET.tonRate||'')}" placeholder="3.50"></label><label>Ticker messages, separated by |<textarea id="s_a" rows="3" placeholder="Free shipping over $150 | Dispatch in 24 hours">${E(SET.announce||'')}</textarea></label><button class="btn p" data-ss="1" style="align-self:flex-start">Save settings</button></div>`;
 const pform=()=>{const p=ED==='new'?{}:(allP().find(x=>x.id===ED)||{}),cs=[...new Set(allP().map(x=>x.cat))];
 return `<h2>${ED==='new'?'New gadget':'Edit gadget'}</h2><div class="f" style="max-width:600px"><label>Name<input id="f_n" value="${E(p.name)}" maxlength="60"></label><div class="ck2"><label>Category<input id="f_c" list="f_cl" value="${E(p.cat)}"><datalist id="f_cl">${cs.map(c=>`<option value="${E(c)}">`).join('')}</datalist></label><label>Price (USD)<input id="f_p" type="number" min="0" value="${E(p.price)}"></label><label>Stock (empty = unlimited)<input id="f_s" type="number" min="0" value="${E(p.stock==null?'':p.stock)}"></label><label>Icon (if no photo)<select id="f_i">${['rect','wave','plug','chip'].map(i=>`<option ${p.icon===i?'selected':''}>${i}</option>`).join('')}</select></label></div><label>Description<textarea id="f_d" rows="3" maxlength="200">${E(p.desc)}</textarea></label><label>Specs, one per line as Name: Value<textarea id="f_sp" rows="4">${E((p.spec||'').split('|').join('\n'))}</textarea></label><label>Photo${p.img?' (leave empty to keep the current one)':''}<input id="f_f" type="file" accept="image/*"></label><label class="ro"><input type="checkbox" id="f_ft" ${p.feat?'checked':''}> Feature in the hero</label><label class="ro"><input type="checkbox" id="f_h" ${p.hidden?'checked':''}> Hide from the shop</label><div style="display:flex;gap:8px"><button class="btn p" data-sv="1">Save gadget</button><button class="btn" data-cx="1">Cancel</button></div></div>`};
 admr=pa=>{if($('adm').hidden||!$('admc'))return;if(pa&&(ED!==null||(document.activeElement&&document.activeElement.closest&&document.activeElement.closest('#admc')&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))))return;
@@ -431,18 +451,29 @@ const big=$('big');
 addEventListener('scroll',()=>{const h=document.documentElement;$('bar').style.width=scrollY/(h.scrollHeight-innerHeight)*100+'%';const r=big.getBoundingClientRect();big.style.transform=`translateX(${(r.top-innerHeight)*.5}px)`},{passive:true});
 // reveal, counters, terminal
 let typed=0;
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');e.target.querySelectorAll('[data-n]').forEach(n=>{const to=+n.dataset.n,t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/1400);n.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString();if(k<1)requestAnimationFrame(f)})(t0)});if(e.target.id==='term'&&!typed){typed=1;const L=['<span class="m"># field kit: wireless audit</span>','<span class="g">$</span> hexvault kit --list','  1x Spectre SDR','  1x Aircheck Dual adapter','  1x Hard case + quick-start','<span class="g">$</span> hexvault scope --check','<span class="g">!</span> No signed scope found.','  Get written permission first.','<span class="g">$</span> <span class="cur"></span>'];let i=0;const t=e.target;t.innerHTML='';(function n(){if(i<L.length){t.innerHTML+=L[i++]+'<br>';setTimeout(n,380)}})()}io.unobserve(e.target)}),{threshold:.25});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');e.target.querySelectorAll('[data-n]').forEach(n=>{const to=+n.dataset.n,t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/1400);n.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString();if(k<1)requestAnimationFrame(f)})(t0)});if(e.target.id==='term'&&!typed){typed=1;const L=['<span class="m"># lab scan</span>','<span class="g">$</span> hexlab scan --target lab.local','  3 access points found','  SDR sweep complete','<span class="g">!</span> weak WPA2 key on guest-wifi','<span class="g">$</span> hexlab scope --check','<span class="g">!</span> No signed scope found.','  Get written permission first.','<span class="g">$</span> <span class="cur"></span>'];let i=0;const t=e.target;t.innerHTML='';(function n(){if(i<L.length){t.innerHTML+=L[i++]+'<br>';setTimeout(n,380)}})()}io.unobserve(e.target)}),{threshold:.25});
 document.querySelectorAll('.rv').forEach(e=>io.observe(e));
 // hero: red glow follows pointer + title scramble
 const g=$('glow');let gx=innerWidth*.7,gy=innerHeight*.4;g.style.transform=`translate(${gx}px,${gy}px) translate(-50%,-50%)`;
 $('top').addEventListener('pointermove',e=>{g.style.transform=`translate(${e.clientX}px,${e.clientY}px) translate(-50%,-50%)`});
 
-// ---- official TON Connect ----
+// ---- official TON Connect (own button, dark purple theme) ----
 let TC=null;
-(function(){try{if(typeof TON_CONNECT_UI==='undefined'||!HV.manifestUrl||/YOUR-SITE/.test(HV.manifestUrl))return;
-TC=new TON_CONNECT_UI.TonConnectUI({manifestUrl:HV.manifestUrl,buttonRootId:'tcb'});
+(function(){try{if(typeof TON_CONNECT_UI==='undefined'||!HV.manifestUrl)return;const D=TON_CONNECT_UI.THEME.DARK;
+TC=new TON_CONNECT_UI.TonConnectUI({manifestUrl:HV.manifestUrl,uiPreferences:{theme:D,borderRadius:'s',colorsSet:{[D]:{constant:{black:'#0b0b0b',white:'#ffffff'},connectButton:{background:'#8b5cf6',foreground:'#ffffff'},accent:'#8b5cf6',telegramButton:'#8b5cf6',icon:{primary:'#f2f2f2',secondary:'#8a8a8a',tertiary:'#5a5a5a',success:'#8b5cf6',error:'#ff5470'},background:{primary:'#0a0a0a',secondary:'#161616',segment:'#161616',tint:'#202020',qr:'#ffffff'},text:{primary:'#f2f2f2',secondary:'#8a8a8a'}}}}});
 TC.onStatusChange(()=>{if(!$('ck').hidden&&CK.s===4&&!CK.done)ckr()})}catch(e){TC=null}})();
 async function tcPay(){try{const r=await TC.sendTransaction({validUntil:Math.floor(Date.now()/1000)+600,messages:[{address:SET.tonAddr,amount:String(Math.round(payAmt()*1e9))}]});CK.paid=true;CK.boc=r&&r.boc||'';CK.err='';CK.s=5;ckr()}catch(e){CK.err='The payment was cancelled or did not go through. Please try again.';ckr()}}
+// ---- products and settings come from data.json (edited by the admin panel) ----
+(async()=>{try{const r=await fetch('data.json?'+Date.now());if(!r.ok)return;const d=await r.json();DATA_OK=true;DB=(d.products||[]).map(x=>({...x}));SET={...SET,...(d.settings||{}),tonAddr:HV.tonAddr||SET.tonAddr};chips();list();draw();route();mq()}catch(e){}})();
+
+// ---- shop by job ----
+const BL={Wireless:'Wi-Fi and radio audits',Network:'LAN taps and drop boxes',USB:'USB payload testing',Hardware:'Chips, tags and bench tools'};
+function catsr(){const g=$('cg');if(!g)return;const a=all(),cs=[...new Set(a.map(x=>x.cat))];
+g.innerHTML=cs.map(c=>{const p=a.filter(x=>x.cat===c),f=p[0];return `<button class="cc" data-cc="${E(c)}"><span class="ci">${ic[f.icon]||ic.rect}</span><b>${E(c)}</b><span>${E(BL[c]||'Browse the range')}</span><small>${p.length} ${p.length===1?'gadget':'gadgets'} →</small></button>`}).join('')}
+$('cg').onclick=e=>{const b=e.target.closest('[data-cc]');if(b){cat=b.dataset.cc;chips();list();location.hash='shop'}};
+catsr();
+
+livePrice();
 </script>
 </body>
 </html>
